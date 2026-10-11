@@ -14,7 +14,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--
 .dash::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 12% 20%,rgba(96,165,250,.28),transparent 45%),radial-gradient(circle at 88% 80%,rgba(167,139,250,.28),transparent 45%)}
 .dash-inner{position:relative;z-index:2;max-width:1320px;margin:0 auto;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .brand{display:flex;align-items:center;gap:12px;min-width:0}
-.logo{width:46px;height:46px;flex:0 0 46px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,#38bdf8,#818cf8 55%,#c084fc);font-weight:800;font-size:14px;color:#08122b;box-shadow:0 6px 18px rgba(56,189,248,.4)}
+.logo{width:46px;height:46px;flex:0 0 46px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,#38bdf8,#818cf8 55%,#c084fc);font-weight:800;font-size:13px;color:#08122b;box-shadow:0 6px 18px rgba(56,189,248,.4)}
 .brand h1{font-size:.98rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .brand p{font-size:.71rem;color:#a9bde0}
 .student{display:flex;align-items:center;gap:12px}
@@ -34,6 +34,8 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--
 .mtab.active{color:var(--pri);border-bottom-color:var(--pri)}
 .mtab .num{width:22px;height:22px;border-radius:7px;display:grid;place-items:center;background:var(--soft);border:1px solid var(--border);font-size:.66rem;font-weight:800;color:var(--muted)}
 .mtab.active .num{background:linear-gradient(135deg,var(--pri),var(--pri2));color:#fff;border-color:transparent}
+.mtab.notes-tab .num{background:linear-gradient(135deg,#10b981,#047857);color:#fff;border-color:transparent}
+.mtab.notes-tab.active .num{background:linear-gradient(135deg,#059669,#065f46)}
 .stabbar{background:var(--soft);border-bottom:1px solid var(--border);position:sticky;top:119px;z-index:180}
 .stabs{max-width:1320px;margin:0 auto;padding:0 12px;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
 .stabs::-webkit-scrollbar{display:none}
@@ -75,7 +77,7 @@ main{max-width:1320px;margin:0 auto;padding:26px 18px 70px}
 .verdict .vpill.blue{background:rgba(96,165,250,.3);border-color:rgba(147,197,253,.5)}
 .verdict .vpill.bad{background:rgba(239,68,68,.26);border-color:rgba(248,113,113,.5)}
 .table-wrap{overflow-x:auto;border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow);background:var(--card)}
-table{width:100%;border-collapse:collapse;min-width:800px;font-size:.8rem}
+table{width:100%;border-collapse:collapse;min-width:700px;font-size:.8rem}
 thead th{background:linear-gradient(120deg,#152a63,#4c1d95);color:#fff;padding:13px 14px;text-align:left;font-weight:700;font-size:.7rem;letter-spacing:.5px;text-transform:uppercase;white-space:nowrap}
 thead th:first-child{background:linear-gradient(120deg,#1e293b,#0f172a)}
 tbody td{padding:12px 14px;border-bottom:1px solid var(--border);color:var(--muted);vertical-align:top}
@@ -95,15 +97,6 @@ tbody tr:last-child td{border-bottom:none}
 .bar-track{height:22px;background:var(--soft);border-radius:8px;overflow:hidden;border:1px solid var(--border)}
 .bar-fill{height:100%;width:0;border-radius:8px;transition:width 1.3s cubic-bezier(.4,0,.2,1)}
 .bar-row .val{font-size:.73rem;font-weight:800;color:var(--pri);text-align:right}
-.cmp-row{margin-bottom:18px}
-.cmp-row .cmp-lbl{font-size:.78rem;font-weight:800;margin-bottom:8px;display:flex;align-items:center;gap:8px}
-.cmp-row .cmp-lbl .n{width:20px;height:20px;border-radius:6px;background:linear-gradient(135deg,var(--pri),var(--pri2));color:#fff;font-size:.66rem;font-weight:800;display:grid;place-items:center;flex:0 0 20px}
-.cmp-bars{display:grid;gap:7px}
-.cmp-bar{display:grid;grid-template-columns:150px 1fr 60px;align-items:center;gap:11px}
-.cmp-bar .who{font-size:.71rem;font-weight:700;color:var(--muted)}
-.cmp-track{height:19px;background:var(--soft);border-radius:7px;overflow:hidden;border:1px solid var(--border)}
-.cmp-fill{height:100%;width:0;border-radius:7px;transition:width 1.3s}
-.cmp-bar .val{font-size:.71rem;font-weight:800;text-align:right}
 .note{margin-top:20px;padding:14px 17px;border-radius:12px;background:linear-gradient(120deg,rgba(245,158,11,.12),rgba(239,68,68,.08));border-left:4px solid var(--warn);font-size:.82rem;color:var(--text)}
 .note b{color:var(--warn)}
 .note.blue{background:linear-gradient(120deg,rgba(37,99,235,.1),rgba(124,58,237,.08));border-left-color:var(--pri)}.note.blue b{color:var(--pri)}
@@ -210,8 +203,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
 .blk .t2{font-size:9.5px;opacity:.9}
 .layer-lbl{font-size:9.5px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;fill:var(--muted)}
 .flow-line{stroke:#94a3b8;stroke-width:2;opacity:.5;fill:none;stroke-linecap:round}
-.flow-dash{stroke-dasharray:7 6;animation:dashmove 1.6s linear infinite}
-@keyframes dashmove{to{stroke-dashoffset:-26}}
 .arch-side{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;margin-top:16px}
 .arch-side .ah{padding:20px;color:#fff;position:relative;overflow:hidden}
 .arch-side .ah::after{content:"";position:absolute;right:-40px;top:-40px;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.12)}
@@ -290,29 +281,84 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;heigh
 .console .line{color:#94a3b8;padding:3px 0;display:flex;gap:10px;animation:fade .3s}
 .console .line .t{color:#475569;flex:0 0 auto}
 .console .line.ok{color:#34d399}.console .line.info{color:#60a5fa}.console .line.warn{color:#fbbf24}.console .line.tts{color:#c084fc}
-.chain{display:grid;gap:10px;margin-top:16px}
-.chain-step{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:var(--soft);opacity:0;transform:translateY(8px);transition:.4s}
-.chain-step.show{opacity:1;transform:none}
-.chain-step .cs-ic{width:36px;height:36px;flex:0 0 36px;border-radius:11px;display:grid;place-items:center;font-size:1.05rem;color:#fff}
-.chain-step .cs-b{flex:1;min-width:0}
-.chain-step .cs-b b{display:block;font-size:.77rem;font-weight:800;margin-bottom:2px}
-.chain-step .cs-b p{font-size:.76rem;color:var(--muted)}
 .heat-table{border-collapse:separate;border-spacing:5px;min-width:740px;width:100%}
 .heat-table th{font-size:.67rem;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);padding:7px 9px;text-align:left;white-space:nowrap}
 .heat-cell{border-radius:9px;padding:10px 8px;text-align:center;font-size:.72rem;font-weight:800;color:#fff;cursor:default;transition:.25s}
 .heat-cell:hover{transform:scale(1.06);box-shadow:0 6px 16px rgba(0,0,0,.2);z-index:2}
 .heat-row-lbl{font-size:.74rem;font-weight:700;color:var(--text);padding:8px 10px;background:var(--soft);border-radius:9px;border:1px solid var(--border)}
-.prev-box{border-radius:13px;border:1px solid var(--border);overflow:hidden;background:#0b1226;position:relative}
-.prev-box .cap{position:absolute;top:8px;left:10px;font-size:.6rem;font-weight:800;letter-spacing:.9px;text-transform:uppercase;color:#94a3b8;z-index:3}
-.prev-box svg{display:block;width:100%;height:auto}
 footer{text-align:center;padding:26px 18px 40px;color:var(--muted);font-size:.77rem;border-top:1px solid var(--border);margin-top:20px}
 footer b{color:var(--pri)}
+
+/* ===== SIMPLE NOTES TAB STYLES ===== */
+.notes-wrap .sec-head h2 .bar{background:linear-gradient(180deg,#10b981,#047857)}
+.notes-wrap .sec-head h2 .qbadge{background:linear-gradient(135deg,#10b981,#047857)}
+.notes-subtitle{color:var(--muted);font-size:.92rem;margin-bottom:24px}
+.notes-h3{font-size:1.1rem;font-weight:800;margin:26px 0 12px;color:var(--text);display:flex;align-items:center;gap:8px}
+.notes-h4{font-size:.95rem;font-weight:800;margin:18px 0 8px;color:var(--text)}
+.notes-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow);margin-bottom:18px}
+.notes-mini-card{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--pri);border-radius:10px;padding:15px 17px;box-shadow:0 2px 8px rgba(16,26,46,.05)}
+.notes-mini-card h4{margin-top:0;margin-bottom:7px;font-size:.92rem;color:var(--pri);font-weight:800}
+.notes-mini-card p{font-size:.85rem;color:var(--muted);margin-bottom:0}
+.notes-simple{background:#eff6ff;border-left:4px solid #2563eb;border-radius:10px;padding:14px 18px;margin:16px 0;font-size:.88rem}
+[data-theme="dark"] .notes-simple{background:rgba(37,99,235,.12)}
+.notes-simple strong{color:#1e40af;display:block;margin-bottom:5px;font-size:.72rem;text-transform:uppercase;letter-spacing:.9px;font-weight:900}
+[data-theme="dark"] .notes-simple strong{color:#93c5fd}
+.notes-exam{background:#f0fdf4;border:1px solid #86efac;border-left:4px solid #10b981;border-radius:10px;padding:16px 18px;margin:20px 0;font-size:.88rem;line-height:1.7}
+[data-theme="dark"] .notes-exam{background:rgba(16,185,129,.1);border-color:rgba(16,185,129,.35)}
+.notes-exam strong{color:#047857;display:block;margin-bottom:8px;font-size:.72rem;text-transform:uppercase;letter-spacing:.9px;font-weight:900}
+[data-theme="dark"] .notes-exam strong{color:#6ee7b7}
+.notes-callout{padding:14px 18px;border-radius:10px;margin:16px 0;font-size:.87rem;border-left:4px solid}
+.notes-callout.tip{background:#fffbeb;border-color:#f59e0b}
+.notes-callout.remember{background:#fdf2f8;border-color:#db2777}
+.notes-callout.note{background:#eff6ff;border-color:#2563eb}
+[data-theme="dark"] .notes-callout.tip{background:rgba(245,158,11,.1)}
+[data-theme="dark"] .notes-callout.remember{background:rgba(219,39,119,.1)}
+[data-theme="dark"] .notes-callout.note{background:rgba(37,99,235,.1)}
+.notes-callout strong{display:block;margin-bottom:5px;font-size:.72rem;text-transform:uppercase;letter-spacing:.9px;font-weight:900}
+.notes-callout.tip strong{color:#b45309}
+.notes-callout.remember strong{color:#be185d}
+.notes-callout.note strong{color:#1e40af}
+[data-theme="dark"] .notes-callout.tip strong{color:#fbbf24}
+[data-theme="dark"] .notes-callout.remember strong{color:#f9a8d4}
+[data-theme="dark"] .notes-callout.note strong{color:#93c5fd}
+.notes-steps{counter-reset:step;list-style:none;padding-left:0;margin:16px 0}
+.notes-steps li{counter-increment:step;position:relative;padding-left:42px;margin-bottom:13px;font-size:.88rem;color:var(--muted)}
+.notes-steps li::before{content:counter(step);position:absolute;left:0;top:0;width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#10b981,#047857);color:#fff;display:grid;place-items:center;font-weight:900;font-size:.78rem}
+.notes-compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+@media(max-width:640px){.notes-compare{grid-template-columns:1fr}}
+.notes-compare>div{padding:15px 17px;border-radius:10px;font-size:.85rem;color:var(--muted)}
+.notes-compare .left{background:#eff6ff;border-left:4px solid #2563eb}
+.notes-compare .right{background:#f0fdf4;border-left:4px solid #10b981}
+[data-theme="dark"] .notes-compare .left{background:rgba(37,99,235,.1)}
+[data-theme="dark"] .notes-compare .right{background:rgba(16,185,129,.1)}
+.notes-compare h4{margin-top:0;font-size:.9rem;font-weight:800;color:var(--text);margin-bottom:8px}
+.notes-compare ul{margin-bottom:0;padding-left:18px}
+.notes-flow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;margin:20px 0;padding:18px;background:var(--soft);border-radius:12px}
+.notes-flow-box{padding:11px 16px;border-radius:10px;color:#fff;font-weight:800;font-size:.8rem;text-align:center;min-width:105px}
+.notes-flow-arrow{font-size:1.25rem;color:var(--muted);font-weight:700}
+.notes-gen-list{display:grid;gap:13px;margin:18px 0}
+.notes-gen-item{background:var(--card);border:1px solid var(--border);border-left:5px solid;border-radius:12px;padding:15px 18px;box-shadow:0 2px 8px rgba(16,26,46,.05)}
+.notes-gen-item h4{margin-top:0;margin-bottom:6px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:.96rem}
+.notes-gen-num{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:8px;color:#fff;font-weight:900;font-size:.82rem}
+.notes-gen-item .period{font-size:.74rem;color:var(--muted);font-weight:600}
+.notes-gen-item p{font-size:.85rem;color:var(--muted);margin-bottom:7px}
+.notes-key-tech{display:inline-block;padding:4px 12px;border-radius:99px;font-size:.72rem;font-weight:800;background:#eff6ff;color:#1e40af;margin-top:4px}
+[data-theme="dark"] .notes-key-tech{background:rgba(37,99,235,.15);color:#93c5fd}
+.notes-code{font-family:var(--mono);background:#0b1226;color:#cbd5e1;padding:12px 14px;border-radius:8px;font-size:.8rem;line-height:1.9;overflow-x:auto}
+.notes-table-wrap{overflow-x:auto;border-radius:10px;border:1px solid var(--border);margin:16px 0}
+.notes-table{width:100%;border-collapse:collapse;font-size:.83rem;background:var(--card);min-width:480px}
+.notes-table th{background:linear-gradient(120deg,#065f46,#047857);color:#fff;padding:11px 13px;text-align:left;font-weight:700;font-size:.74rem;letter-spacing:.4px}
+.notes-table td{padding:11px 13px;border-bottom:1px solid var(--border);color:var(--muted);vertical-align:top}
+.notes-table tr:last-child td{border-bottom:none}
+.notes-table tr:nth-child(even) td{background:var(--soft)}
+.notes-table td:first-child{font-weight:800;color:var(--text)}
+
 @media(max-width:720px){
 .dash-inner{padding:10px 14px}.brand h1{font-size:.85rem}.brand p{display:none}
 .chip{font-size:.6rem;padding:2px 7px}.avatar{width:38px;height:38px;flex-basis:38px;font-size:.9rem}
 .mtabbar{top:64px}.stabbar{top:113px}
 .opts{margin-left:0}.explain{margin-left:0}.sec-head h2{font-size:1.12rem}
-.bar-row{grid-template-columns:98px 1fr 58px;gap:8px}.cmp-bar{grid-template-columns:100px 1fr 50px;gap:8px}
+.bar-row{grid-template-columns:98px 1fr 58px;gap:8px}
 .sim-lbl{font-size:.55rem}.sim-dot{width:32px;height:32px;font-size:.7rem;border-width:2px}
 .sim-track::before,.sim-prog{top:16px}.verdict h3{font-size:1rem}}
 </style>
@@ -325,7 +371,7 @@ footer b{color:var(--pri)}
       <div class="logo">CS</div>
       <div>
         <h1>Computer Fundamentals — Complete Assignment</h1>
-        <p>8 Questions • Interactive Dashboard • BPT 1st Year</p>
+        <p>8 Questions • Interactive + Simple Notes • BPT 1st Year</p>
       </div>
     </div>
     <div class="student">
@@ -338,7 +384,7 @@ footer b{color:var(--pri)}
           <span class="chip">Year: <b>1st Year</b></span>
         </div>
       </div>
-      <button class="theme-btn" id="themeBtn" title="Toggle theme">🌙</button>
+      <button class="theme-btn" id="themeBtn">🌙</button>
     </div>
   </div>
 </header>
@@ -346,37 +392,51 @@ footer b{color:var(--pri)}
 <nav class="mtabbar">
   <div class="mtabs" id="mtabs">
     <button class="mtab active" data-q="q0"><span class="num">★</span>Dashboard</button>
-    <button class="mtab" data-q="q1"><span class="num">1</span>Characteristics &amp; Generations</button>
+    <button class="mtab" data-q="q1"><span class="num">1</span>Characteristics</button>
     <button class="mtab" data-q="q2"><span class="num">2</span>Block Diagram</button>
-    <button class="mtab" data-q="q3"><span class="num">3</span>Scanning &amp; Card Readers</button>
-    <button class="mtab" data-q="q4"><span class="num">4</span>Language Categories</button>
-    <button class="mtab" data-q="q5"><span class="num">5</span>Point-and-Draw vs Tablets</button>
-    <button class="mtab" data-q="q6"><span class="num">6</span>Plotter vs Monitor+Printer</button>
-    <button class="mtab" data-q="q7"><span class="num">7</span>Face vs Voice Biometrics</button>
-    <button class="mtab" data-q="q8"><span class="num">8</span>Accessible Workstation</button>
+    <button class="mtab" data-q="q3"><span class="num">3</span>Scanners &amp; Cards</button>
+    <button class="mtab" data-q="q4"><span class="num">4</span>Languages</button>
+    <button class="mtab" data-q="q5"><span class="num">5</span>Input Devices</button>
+    <button class="mtab" data-q="q6"><span class="num">6</span>Output Systems</button>
+    <button class="mtab" data-q="q7"><span class="num">7</span>Biometrics</button>
+    <button class="mtab" data-q="q8"><span class="num">8</span>Accessible PC</button>
+    <button class="mtab notes-tab" data-q="notes"><span class="num">📖</span>Simple Notes</button>
   </div>
 </nav>
 
 <main>
 
-<!-- DASHBOARD -->
+<!-- ===================================================== -->
+<!-- ==================== DASHBOARD ===================== -->
+<!-- ===================================================== -->
 <div class="qwrap active" id="q0">
   <div class="sec-head">
     <h2><span class="bar"></span>Assignment Dashboard</h2>
-    <p>Welcome, <b>Rahul</b>. Click any card below — or use the tabs above — to jump into a question.</p>
+    <p>Welcome, <b>Rahul</b>. This dashboard bundles all eight Computer Fundamentals questions into one file — with two ways to study: <b>Interactive</b> (tabs for Q1–Q8) and <b>Simple Notes</b> (plain-language revision).</p>
   </div>
   <div class="verdict">
     <div class="vt">📚 Assignment Overview</div>
-    <h3>Eight questions covering computer characteristics, architecture, I/O hardware, languages, and assistive technology.</h3>
-    <p>Each question has its own sub-tabs, interactive simulations and a self-assessment quiz.</p>
-    <div class="pillrow"><span class="vpill win">✓ 8 Questions</span><span class="vpill blue">✓ Interactive</span><span class="vpill">✓ 48 Quiz Questions</span></div>
+    <h3>Two ways to study each question — interactive exploration and simple revision notes.</h3>
+    <p>Use the interactive tabs (Q1–Q8) to explore diagrams, simulations and quizzes. Use the <b>📖 Simple Notes</b> tab for plain-language explanations and ready-to-write exam answers.</p>
+    <div class="pillrow">
+      <span class="vpill win">✓ 8 Interactive Questions</span>
+      <span class="vpill blue">✓ 8 Simple Notes Sections</span>
+      <span class="vpill">✓ 48 Quiz Questions</span>
+      <span class="vpill">✓ Exam-Ready Answers</span>
+    </div>
   </div>
-  <h3 style="margin:30px 0 6px;font-size:1.02rem;font-weight:800">📖 Choose a Question</h3>
+  <h3 style="margin:30px 0 6px;font-size:1.02rem;font-weight:800">📖 Interactive Questions</h3>
+  <p style="color:var(--muted);font-size:.86rem;margin-bottom:16px">Explore diagrams, simulations and quizzes for each question.</p>
   <div class="qgrid" id="qgrid"></div>
-  <div class="note blue" style="margin-top:26px"><b>ℹ️ Navigation:</b> Use the top tab bar to switch between questions, and the second tab bar inside each question. Arrow keys ← → also work.</div>
+  <h3 style="margin:30px 0 6px;font-size:1.02rem;font-weight:800">📝 Simple Notes</h3>
+  <p style="color:var(--muted);font-size:.86rem;margin-bottom:16px">Prefer plain language and exam-ready answers? The Simple Notes tab has an easy-to-read version of every question.</p>
+  <button class="btn" onclick="document.querySelector('.mtab[data-q=notes]').click()" style="margin-top:6px">📖 Open Simple Notes →</button>
+  <div class="note blue" style="margin-top:26px"><b>ℹ️ Navigation:</b> Use the top tab bar to switch between questions and the Simple Notes section. The second tab bar inside each question lets you jump between that question's sections. Arrow keys ← → also work.</div>
 </div>
 
-<!-- Q1 -->
+<!-- ===================================================== -->
+<!-- ==================== Q1 ============================= -->
+<!-- ===================================================== -->
 <div class="qwrap" id="q1">
   <nav class="stabbar"><div class="stabs" data-for="q1">
     <button class="stab active" data-p="q1-overview"><span class="ic">📊</span>Overview</button>
@@ -388,11 +448,11 @@ footer b{color:var(--pri)}
   </div></nav>
 
   <div class="qpanel active" id="q1-overview">
-    <div class="sec-head"><h2><span class="bar"></span>Computer Characteristics &amp; Hardware Across Generations<span class="qbadge">Q1</span></h2>
+    <div class="sec-head"><h2><span class="bar"></span>Computer Characteristics &amp; Generations<span class="qbadge">Q1</span></h2>
     <p>List four primary characteristics of a modern digital computer and identify the key hardware technology of each of the five generations.</p></div>
     <div class="grid g4">
       <div class="card"><div class="c-icon" style="background:linear-gradient(135deg,#ef4444,#f59e0b)">⚡</div><h3>Speed</h3><p>Millions to billions of instructions per second.</p><div class="stat"><span>Unit</span><b>GHz / MIPS</b></div></div>
-      <div class="card"><div class="c-icon" style="background:linear-gradient(135deg,#10b981,#047857)">🎯</div><h3>Accuracy</h3><p>100% accurate results if input is correct. GIGO.</p><div class="stat"><span>Error</span><b>0% (correct input)</b></div></div>
+      <div class="card"><div class="c-icon" style="background:linear-gradient(135deg,#10b981,#047857)">🎯</div><h3>Accuracy</h3><p>100% accurate if input is correct. GIGO.</p><div class="stat"><span>Error</span><b>0% (correct input)</b></div></div>
       <div class="card"><div class="c-icon" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)">💾</div><h3>Storage &amp; Diligence</h3><p>Stores enormous data and never tires.</p><div class="stat"><span>Capacity</span><b>GB to PB</b></div></div>
       <div class="card"><div class="c-icon" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)">🔄</div><h3>Versatility &amp; Automation</h3><p>Many tasks, runs automatically once programmed.</p><div class="stat"><span>Mode</span><b>Program-driven</b></div></div>
     </div>
@@ -400,7 +460,7 @@ footer b{color:var(--pri)}
   </div>
 
   <div class="qpanel" id="q1-char">
-    <div class="sec-head"><h2><span class="bar"></span>Four Primary Characteristics</h2><p>Every modern digital computer shares these characteristics.</p></div>
+    <div class="sec-head"><h2><span class="bar"></span>Four Primary Characteristics</h2></div>
     <div class="chart"><h3>Characteristic Strength Profile</h3><p class="sub">Illustrative comparison.</p><div id="q1-charChart"></div></div>
   </div>
 
@@ -413,18 +473,18 @@ footer b{color:var(--pri)}
   <div class="qpanel" id="q1-compare">
     <div class="sec-head"><h2><span class="bar"></span>Generation-wise Comparison</h2></div>
     <div class="table-wrap"><table><thead><tr><th>Gen</th><th>Period</th><th>Key Hardware</th><th>Memory</th><th>Examples</th><th>Language</th></tr></thead><tbody id="q1-tbody"></tbody></table></div>
-    <div class="chart"><h3>Relative Computing Power Across Generations</h3><p class="sub">Illustrative growth trend.</p><div id="q1-powerChart"></div></div>
+    <div class="chart"><h3>Relative Computing Power Across Generations</h3><div id="q1-powerChart"></div></div>
   </div>
 
   <div class="qpanel" id="q1-match">
-    <div class="sec-head"><h2><span class="bar"></span>Match the Generation with its Hardware</h2><p>Click a generation on the left, then its hardware on the right.</p></div>
+    <div class="sec-head"><h2><span class="bar"></span>Match the Generation with its Hardware</h2></div>
     <div class="q-card">
       <div class="q-top"><h3>🧩 Interactive Matching Activity</h3><span class="score-pill" id="q1-matchScore">Matched: 0 / 5</span></div>
       <div class="match-wrap">
         <div class="col"><h4>Generations</h4><div id="q1-matchLeft"></div></div>
         <div class="col"><h4>Key Hardware Technology</h4><div id="q1-matchRight"></div></div>
       </div>
-      <div class="ctrl-row"><button class="btn ghost" id="q1-matchReset">🔄 Reset Game</button></div>
+      <div class="ctrl-row"><button class="btn ghost" id="q1-matchReset">🔄 Reset</button></div>
       <div class="result" id="q1-matchResult"><div class="big">🎉 Perfect!</div><p>All five matched correctly.</p></div>
     </div>
   </div>
@@ -432,7 +492,7 @@ footer b{color:var(--pri)}
   <div class="qpanel" id="q1-quiz">
     <div class="sec-head"><h2><span class="bar"></span>Self-Assessment Quiz</h2></div>
     <div class="q-card">
-      <div class="q-top"><h3>🎯 Answer all questions</h3><span class="score-pill" id="q1-quizProgress">Answered: 0 / 6</span></div>
+      <div class="q-top"><h3>🎯 Answer all</h3><span class="score-pill" id="q1-quizProgress">Answered: 0 / 6</span></div>
       <div class="pbar"><i id="q1-quizBar"></i></div>
       <form id="q1-quizForm"></form>
       <div class="ctrl-row"><button class="btn" id="q1-submitQuiz" type="button">✅ Submit</button><button class="btn ghost" id="q1-resetQuiz" type="button">🔄 Try Again</button></div>
@@ -441,7 +501,9 @@ footer b{color:var(--pri)}
   </div>
 </div>
 
-<!-- Q2 -->
+<!-- ===================================================== -->
+<!-- ==================== Q2 ============================= -->
+<!-- ===================================================== -->
 <div class="qwrap" id="q2">
   <nav class="stabbar"><div class="stabs" data-for="q2">
     <button class="stab active" data-p="q2-overview"><span class="ic">📊</span>Overview</button>
@@ -496,28 +558,28 @@ footer b{color:var(--pri)}
     </div>
     <div class="arch-side" id="q2-side">
       <div class="ah" style="background:linear-gradient(135deg,#2563eb,#7c3aed)"><span class="tag">Click a block</span><h3>Select any unit</h3></div>
-      <div class="ab"><p>Click CPU, Memory, Input, Output, I/O Interface or Secondary Storage above to read its function and interaction.</p></div>
+      <div class="ab"><p>Click CPU, Memory, Input, Output, I/O Interface or Secondary Storage above to read its function.</p></div>
     </div>
   </div>
 
   <div class="qpanel" id="q2-flow">
     <div class="sec-head"><h2><span class="bar"></span>Flow of Data, Instructions &amp; Control</h2></div>
     <div class="grid g3">
-      <div class="card" style="border-top:5px solid #38bdf8"><div class="c-icon" style="background:linear-gradient(135deg,#38bdf8,#0284c7)">🔵</div><h3>Data Flow</h3><p>Actual information. Bidirectional on the Data Bus.</p><div class="stat"><span>Direction</span><b>Both ways ⇄</b></div></div>
+      <div class="card" style="border-top:5px solid #38bdf8"><div class="c-icon" style="background:linear-gradient(135deg,#38bdf8,#0284c7)">🔵</div><h3>Data Flow</h3><p>Actual information. Bidirectional.</p><div class="stat"><span>Direction</span><b>Both ways ⇄</b></div></div>
       <div class="card" style="border-top:5px solid #f59e0b"><div class="c-icon" style="background:linear-gradient(135deg,#f59e0b,#b45309)">🟠</div><h3>Instruction Flow</h3><p>Commands telling the CPU what to do.</p><div class="stat"><span>Direction</span><b>Memory → CPU</b></div></div>
-      <div class="card" style="border-top:5px solid #a78bfa"><div class="c-icon" style="background:linear-gradient(135deg,#a78bfa,#6d28d9)">🟣</div><h3>Control Signals</h3><p>Read, Write, Interrupt, Clock, Reset — from the CU.</p><div class="stat"><span>Direction</span><b>CU → all units</b></div></div>
+      <div class="card" style="border-top:5px solid #a78bfa"><div class="c-icon" style="background:linear-gradient(135deg,#a78bfa,#6d28d9)">🟣</div><h3>Control Signals</h3><p>Read, Write, Interrupt, Clock.</p><div class="stat"><span>Direction</span><b>CU → all</b></div></div>
     </div>
-    <div class="note green" style="margin-top:24px"><b>Instruction cycle:</b> FETCH → DECODE → EXECUTE → STORE, repeated billions of times per second.</div>
+    <div class="note green" style="margin-top:24px"><b>Instruction cycle:</b> FETCH → DECODE → EXECUTE → STORE.</div>
   </div>
 
   <div class="qpanel" id="q2-bus">
     <div class="sec-head"><h2><span class="bar"></span>System Bus &amp; I/O Interface</h2></div>
     <div class="grid g3">
-      <div class="card"><div class="c-icon" style="background:linear-gradient(135deg,#38bdf8,#0284c7)">🔵</div><h3>Data Bus</h3><p>Carries actual data and instructions.</p><div class="stat"><span>Width</span><b>8/16/32/64 bit</b></div></div>
+      <div class="card"><div class="c-icon" style="background:linear-gradient(135deg,#38bdf8,#0284c7)">🔵</div><h3>Data Bus</h3><p>Carries data and instructions.</p><div class="stat"><span>Width</span><b>8/16/32/64 bit</b></div></div>
       <div class="card"><div class="c-icon" style="background:linear-gradient(135deg,#34d399,#059669)">🟢</div><h3>Address Bus</h3><p>Carries the address. Unidirectional.</p><div class="stat"><span>Direction</span><b>CPU → Memory</b></div></div>
-      <div class="card"><div class="c-icon" style="background:linear-gradient(135deg,#a78bfa,#6d28d9)">🟣</div><h3>Control Bus</h3><p>Command and timing signals from the CU.</p><div class="stat"><span>Source</span><b>Control Unit</b></div></div>
+      <div class="card"><div class="c-icon" style="background:linear-gradient(135deg,#a78bfa,#6d28d9)">🟣</div><h3>Control Bus</h3><p>Signals from the CU.</p><div class="stat"><span>Source</span><b>Control Unit</b></div></div>
     </div>
-    <div class="note blue" style="margin-top:24px"><b>I/O Interface:</b> Bridges fast CPU and slow devices — buffering, signal conversion, error checking, address decoding, interrupt handling.</div>
+    <div class="note blue" style="margin-top:24px"><b>I/O Interface:</b> Buffering, signal conversion, error checking, address decoding, interrupt handling.</div>
   </div>
 
   <div class="qpanel" id="q2-quiz">
@@ -532,7 +594,9 @@ footer b{color:var(--pri)}
   </div>
 </div>
 
-<!-- Q3 -->
+<!-- ===================================================== -->
+<!-- ==================== Q3 ============================= -->
+<!-- ===================================================== -->
 <div class="qwrap" id="q3">
   <nav class="stabbar"><div class="stabs" data-for="q3">
     <button class="stab active" data-p="q3-overview"><span class="ic">🏫</span>Overview</button>
@@ -543,10 +607,10 @@ footer b{color:var(--pri)}
   </div></nav>
 
   <div class="qpanel active" id="q3-overview">
-    <div class="sec-head"><h2><span class="bar"></span>Campus Automation — Scanning &amp; Card Reading Hardware<span class="qbadge">Q3</span></h2><p>Deploy optical scanners (barcode/OMR) and card readers (RFID/smart cards) to automate attendance and library checkouts.</p></div>
+    <div class="sec-head"><h2><span class="bar"></span>Campus Automation — Scanning &amp; Card Readers<span class="qbadge">Q3</span></h2><p>Deploy optical scanners and card readers in a campus to automate attendance and library checkouts.</p></div>
     <div class="grid g4">
       <div class="card"><div class="c-icon" style="background:linear-gradient(135deg,#059669,#047857)">⚡</div><h3>Zero Manual Entry</h3><p>No roll calls or paper slips.</p><div class="stat"><span>Error</span><b>Near zero</b></div></div>
-      <div class="card"><div class="c-icon" style="background:linear-gradient(135deg,#2563eb,#7c3aed)">⏱️</div><h3>Real-Time Data</h3><p>Instant writes to the database.</p><div class="stat"><span>Latency</span><b>&lt; 100 ms</b></div></div>
+      <div class="card"><div class="c-icon" style="background:linear-gradient(135deg,#2563eb,#7c3aed)">⏱️</div><h3>Real-Time Data</h3><p>Instant writes to database.</p><div class="stat"><span>Latency</span><b>&lt; 100 ms</b></div></div>
       <div class="card"><div class="c-icon" style="background:linear-gradient(135deg,#d97706,#b45309)">🛡️</div><h3>Anti-Proxy</h3><p>Unique card UID cannot be forged.</p><div class="stat"><span>IDs</span><b>2⁴⁰–2⁵⁶</b></div></div>
       <div class="card"><div class="c-icon" style="background:linear-gradient(135deg,#0891b2,#0e7490)">📊</div><h3>Analytics</h3><p>Auto reports and trends.</p><div class="stat"><span>Reports</span><b>Automatic</b></div></div>
     </div>
@@ -563,7 +627,7 @@ footer b{color:var(--pri)}
   </div>
 
   <div class="qpanel" id="q3-library">
-    <div class="sec-head"><h2><span class="bar"></span>Library Checkout Demo</h2><p>Scan student card, then scan a book barcode.</p></div>
+    <div class="sec-head"><h2><span class="bar"></span>Library Checkout Demo</h2><p>Scan student card, then scan book barcode.</p></div>
     <div class="grid g2">
       <div class="card" style="text-align:center">
         <h3 style="margin-bottom:8px">Step 1 — Scan Student Card</h3>
@@ -601,7 +665,9 @@ footer b{color:var(--pri)}
   </div>
 </div>
 
-<!-- Q4 -->
+<!-- ===================================================== -->
+<!-- ==================== Q4 ============================= -->
+<!-- ===================================================== -->
 <div class="qwrap" id="q4">
   <nav class="stabbar"><div class="stabs" data-for="q4">
     <button class="stab active" data-p="q4-overview"><span class="ic">📊</span>Overview</button>
@@ -617,7 +683,7 @@ footer b{color:var(--pri)}
     <div class="grid g4">
       <div class="card"><div class="c-icon" style="background:linear-gradient(135deg,#dc2626,#b91c1c)">⚡</div><h3>Execution Speed</h3><p>Low-level code runs fastest.</p><div class="stat"><span>Winner</span><b>Low-Level</b></div></div>
       <div class="card"><div class="c-icon" style="background:linear-gradient(135deg,#0891b2,#0e7490)">🔌</div><h3>Hardware Dependence</h3><p>High-level code is portable.</p><div class="stat"><span>Winner</span><b>High-Level</b></div></div>
-      <div class="card"><div class="c-icon" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)">🔧</div><h3>Translation</h3><p>Machine → none; Assembly → assembler; High-level → compiler/interpreter.</p><div class="stat"><span>Depends</span><b>On category</b></div></div>
+      <div class="card"><div class="c-icon" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)">🔧</div><h3>Translation</h3><p>Machine → none; Assembly → assembler; High-level → compiler.</p><div class="stat"><span>Depends</span><b>On category</b></div></div>
       <div class="card"><div class="c-icon" style="background:linear-gradient(135deg,#10b981,#047857)">📝</div><h3>Complexity</h3><p>High-level code is far easier.</p><div class="stat"><span>Winner</span><b>High-Level</b></div></div>
     </div>
   </div>
@@ -677,7 +743,9 @@ footer b{color:var(--pri)}
   </div>
 </div>
 
-<!-- Q5 -->
+<!-- ===================================================== -->
+<!-- ==================== Q5 ============================= -->
+<!-- ===================================================== -->
 <div class="qwrap" id="q5">
   <nav class="stabbar"><div class="stabs" data-for="q5">
     <button class="stab active" data-p="q5-overview"><span class="ic">📊</span>Overview</button>
@@ -691,12 +759,12 @@ footer b{color:var(--pri)}
     <div class="sec-head"><h2><span class="bar"></span>Point-and-Draw Devices vs Graphics Tablets<span class="qbadge">Q5</span></h2><p>Compare coordinate tracking mechanisms and pressure sensitivity for CAD and digital art.</p></div>
     <div class="grid g2">
       <div class="card" style="border-top:5px solid #2563eb"><div class="c-icon" style="background:linear-gradient(135deg,#2563eb,#1d4ed8)">🧭</div><h3>Coordinate Tracking</h3><p>Relative devices (mouse, trackball) report deltas. Absolute devices (tablets) report exact position.</p><div class="stat"><span>Core</span><b>Delta vs Position</b></div></div>
-      <div class="card" style="border-top:5px solid #8b5cf6"><div class="c-icon" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)">🖌️</div><h3>Pressure Sensitivity</h3><p>Mouse button = 1 bit. Tablet stylus = 1,024–8,192 pressure levels plus tilt.</p><div class="stat"><span>Levels</span><b>0 vs 1,024+</b></div></div>
+      <div class="card" style="border-top:5px solid #8b5cf6"><div class="c-icon" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)">🖌️</div><h3>Pressure Sensitivity</h3><p>Mouse = 1 bit. Tablet = 1,024–8,192 pressure levels plus tilt.</p><div class="stat"><span>Levels</span><b>0 vs 1,024+</b></div></div>
     </div>
   </div>
 
   <div class="qpanel" id="q5-track">
-    <div class="sec-head"><h2><span class="bar"></span>Coordinate Tracking — Feel the Difference</h2><p>Move your pointer across both pads below.</p></div>
+    <div class="sec-head"><h2><span class="bar"></span>Coordinate Tracking — Feel the Difference</h2><p>Move your pointer across both pads.</p></div>
     <div class="track-demo">
       <div class="track-col">
         <h4><span class="pip" style="background:#2563eb"></span>Mouse — RELATIVE</h4>
@@ -751,7 +819,9 @@ footer b{color:var(--pri)}
   </div>
 </div>
 
-<!-- Q6 -->
+<!-- ===================================================== -->
+<!-- ==================== Q6 ============================= -->
+<!-- ===================================================== -->
 <div class="qwrap" id="q6">
   <nav class="stabbar"><div class="stabs" data-for="q6">
     <button class="stab active" data-p="q6-overview"><span class="ic">📊</span>Overview</button>
@@ -823,7 +893,7 @@ footer b{color:var(--pri)}
         </ul>
       </div>
     </div>
-    <div class="note purple" style="margin-top:24px"><b>Final:</b> Monitor + large-format printer is superior for the majority of blueprint production. A drum plotter remains preferable only at very high volume or where archival vector output is mandated.</div>
+    <div class="note purple" style="margin-top:24px"><b>Final:</b> Monitor + printer is superior for the majority of blueprint production. A drum plotter remains preferable only at very high volume or where archival vector output is mandated.</div>
   </div>
 
   <div class="qpanel" id="q6-quiz">
@@ -838,14 +908,15 @@ footer b{color:var(--pri)}
   </div>
 </div>
 
-<!-- Q7 -->
+<!-- ===================================================== -->
+<!-- ==================== Q7 ============================= -->
+<!-- ===================================================== -->
 <div class="qwrap" id="q7">
   <nav class="stabbar"><div class="stabs" data-for="q7">
     <button class="stab active" data-p="q7-overview"><span class="ic">📊</span>Overview</button>
     <button class="stab" data-p="q7-lab"><span class="ic">🌩️</span>Environmental Lab</button>
     <button class="stab" data-p="q7-attack"><span class="ic">🛡️</span>Attack Console</button>
     <button class="stab" data-p="q7-matrix"><span class="ic">📋</span>Reliability Matrix</button>
-    <button class="stab" data-p="q7-critique"><span class="ic">⚖️</span>Critique</button>
     <button class="stab" data-p="q7-quiz"><span class="ic">🎯</span>Quiz</button>
   </div></nav>
 
@@ -866,53 +937,28 @@ footer b{color:var(--pri)}
         <h4 style="font-size:.9rem;margin-bottom:10px">🔊 Ambient Noise</h4>
         <span class="ctrl-label">Noise level <b id="q7-vNoise">70 dB</b></span>
         <input type="range" id="q7-sNoise" min="30" max="110" value="70">
-        <div class="readout" style="margin-top:14px"><span>Face (hardened): <b id="q7-aFace">99%</b></span><span>Voice (hardened): <b id="q7-aVoice">88%</b></span></div>
+        <div class="readout" style="margin-top:14px"><span>Face: <b id="q7-aFace">99%</b></span><span>Voice: <b id="q7-aVoice">88%</b></span></div>
         <div id="q7-labVerdict" class="note blue" style="margin-top:14px;font-size:.8rem"></div>
       </div>
       <div class="card">
         <h4 style="font-size:.9rem;margin-bottom:10px">💡 Illumination</h4>
         <span class="ctrl-label">Illuminance <b id="q7-vLux">1000 lux</b></span>
         <input type="range" id="q7-sLux" min="0" max="5" value="3" step="0.05">
-        <div class="readout" style="margin-top:14px"><span>RGB-only: <b id="q7-aRGB">98%</b></span><span>NIR + 3D: <b id="q7-aNIR">99%</b></span></div>
+        <div class="readout" style="margin-top:14px"><span>RGB: <b id="q7-aRGB">98%</b></span><span>NIR+3D: <b id="q7-aNIR">99%</b></span></div>
         <div id="q7-luxVerdict" class="note purple" style="margin-top:14px;font-size:.8rem"></div>
       </div>
     </div>
   </div>
 
   <div class="qpanel" id="q7-attack">
-    <div class="sec-head"><h2><span class="bar"></span>Presentation Attack Console</h2><p>Click an attack to see how each system responds.</p></div>
+    <div class="sec-head"><h2><span class="bar"></span>Presentation Attack Console</h2></div>
     <div class="seg-mini" id="q7-atkPick"></div>
     <div id="q7-atkResult"></div>
   </div>
 
   <div class="qpanel" id="q7-matrix">
-    <div class="sec-head"><h2><span class="bar"></span>Reliability Matrix</h2><p>Colour-coded performance across ten conditions.</p></div>
+    <div class="sec-head"><h2><span class="bar"></span>Reliability Matrix</h2></div>
     <div class="table-wrap" style="padding:14px"><table class="heat-table" id="q7-heatTable"></table></div>
-  </div>
-
-  <div class="qpanel" id="q7-critique">
-    <div class="sec-head"><h2><span class="bar"></span>Formal Critique</h2></div>
-    <div class="grid g2">
-      <div class="card" style="border-top:5px solid #10b981">
-        <div class="c-icon" style="background:linear-gradient(135deg,#10b981,#047857)">✓</div><h3>Facial Superior On</h3>
-        <ul class="kv-list" style="margin-top:10px">
-          <li><span class="fl g">✓</span><span>Noise immunity — acoustic is irrelevant to optics</span></li>
-          <li><span class="fl g">✓</span><span>Controllable channel — NIR/diffuser</span></li>
-          <li><span class="fl g">✓</span><span>Higher entropy</span></li>
-          <li><span class="fl g">✓</span><span>Higher throughput</span></li>
-        </ul>
-      </div>
-      <div class="card" style="border-top:5px solid #ef4444">
-        <div class="c-icon" style="background:linear-gradient(135deg,#ef4444,#b91c1c)">⚠️</div><h3>Voice Superior On</h3>
-        <ul class="kv-list" style="margin-top:10px">
-          <li><span class="fl g">✓</span><span>Lower hardware cost</span></li>
-          <li><span class="fl g">✓</span><span>Works in darkness</span></li>
-          <li><span class="fl g">✓</span><span>Privacy-lighter</span></li>
-          <li><span class="fl g">✓</span><span>Accessible to visually impaired</span></li>
-        </ul>
-      </div>
-    </div>
-    <div class="note purple" style="margin-top:24px"><b>Conclusion:</b> Neither biometric should be the sole authenticator. Deploy <b>face as primary with a possession or knowledge factor</b>, enforce on-device liveness, store templates in a secure element.</div>
   </div>
 
   <div class="qpanel" id="q7-quiz">
@@ -927,7 +973,9 @@ footer b{color:var(--pri)}
   </div>
 </div>
 
-<!-- Q8 -->
+<!-- ===================================================== -->
+<!-- ==================== Q8 ============================= -->
+<!-- ===================================================== -->
 <div class="qwrap" id="q8">
   <nav class="stabbar"><div class="stabs" data-for="q8">
     <button class="stab active" data-p="q8-overview"><span class="ic">📋</span>Design Brief</button>
@@ -940,7 +988,7 @@ footer b{color:var(--pri)}
   </div></nav>
 
   <div class="qpanel active" id="q8-overview">
-    <div class="sec-head"><h2><span class="bar"></span>Hands-Free Accessible Workstation<span class="qbadge">Q8</span></h2><p>Design an accessible, hands-free computer workstation for a visually impaired user — coherent integration of non-visual inputs and specialized outputs.</p></div>
+    <div class="sec-head"><h2><span class="bar"></span>Hands-Free Accessible Workstation<span class="qbadge">Q8</span></h2><p>Design an accessible, hands-free computer workstation for a visually impaired user.</p></div>
     <div class="verdict">
       <div class="vt">🎯 Design Position</div>
       <h3>The workstation is a closed audio-tactile feedback loop: every input is confirmed by a non-visual output, and every action is reversible by voice.</h3>
@@ -953,7 +1001,7 @@ footer b{color:var(--pri)}
       <div class="card" style="border-top:5px solid #10b981"><div class="c-icon" style="background:linear-gradient(135deg,#10b981,#047857)">⠿</div><h3>3. Tactile Grounding</h3><p>Braille for spelling, punctuation and code.</p></div>
       <div class="card" style="border-top:5px solid #f59e0b"><div class="c-icon" style="background:linear-gradient(135deg,#f59e0b,#b45309)">🖐️</div><h3>4. Redundant Control</h3><p>No single point of failure.</p></div>
       <div class="card" style="border-top:5px solid #0891b2"><div class="c-icon" style="background:linear-gradient(135deg,#0891b2,#0e7490)">↩️</div><h3>5. Reversibility</h3><p>Confirmation + undo for destructive actions.</p></div>
-      <div class="card" style="border-top:5px solid #db2777"><div class="c-icon" style="background:linear-gradient(135deg,#db2777,#9d174d)">🎛️</div><h3>6. User Pacing</h3><p>Live adjustable speech rate, verbosity, key echo.</p></div>
+      <div class="card" style="border-top:5px solid #db2777"><div class="c-icon" style="background:linear-gradient(135deg,#db2777,#9d174d)">🎛️</div><h3>6. User Pacing</h3><p>Live adjustable speech rate, verbosity.</p></div>
     </div>
   </div>
 
@@ -968,7 +1016,7 @@ footer b{color:var(--pri)}
   </div>
 
   <div class="qpanel" id="q8-arch">
-    <div class="sec-head"><h2><span class="bar"></span>Integrated System Architecture</h2><p>Click any block to read its role and interactions.</p></div>
+    <div class="sec-head"><h2><span class="bar"></span>Integrated System Architecture</h2><p>Click any block to read its role.</p></div>
     <div class="arch-wrap">
       <svg id="q8-svg" viewBox="0 0 1000 640" xmlns="http://www.w3.org/2000/svg">
         <defs>
@@ -1010,13 +1058,11 @@ footer b{color:var(--pri)}
         <g class="blk" data-blk="brailleOut"><rect class="rect" x="270" y="456" width="220" height="82" rx="14" fill="url(#q8gOut2)"/><text class="t1" x="380" y="486" text-anchor="middle">⠿ BRAILLE DISPLAY</text><text class="t2" x="380" y="504" text-anchor="middle">Refreshable 40–80 cells</text><text class="t2" x="380" y="521" text-anchor="middle">Silent · precise · private</text></g>
         <g class="blk" data-blk="haptic"><rect class="rect" x="510" y="456" width="220" height="82" rx="14" fill="url(#q8gOut3)"/><text class="t1" x="620" y="486" text-anchor="middle">📳 HAPTIC FEEDBACK</text><text class="t2" x="620" y="504" text-anchor="middle">Confirmation vibration</text><text class="t2" x="620" y="521" text-anchor="middle">Error patterns · state cues</text></g>
         <g class="blk" data-blk="audio"><rect class="rect" x="750" y="456" width="220" height="82" rx="14" fill="url(#q8gOut4)"/><text class="t1" x="860" y="486" text-anchor="middle">🎧 AUDIO / EARCONS</text><text class="t2" x="860" y="504" text-anchor="middle">Headphones + bone conduction</text><text class="t2" x="860" y="521" text-anchor="middle">Non-speech state sounds</text></g>
-        <path class="flow-line flow-dash" d="M 985 497 L 985 600 L 500 600"/>
-        <text x="740" y="596" text-anchor="middle" font-size="9.5" font-weight="800" fill="var(--muted)" letter-spacing="1">CONTINUOUS FEEDBACK LOOP</text>
       </svg>
     </div>
     <div class="arch-side" id="q8-side">
       <div class="ah" style="background:linear-gradient(135deg,#2563eb,#7c3aed)"><span class="tag">Click a block</span><h3>Select any component</h3></div>
-      <div class="ab"><p>Click any block in the diagram above to read its role and interactions.</p></div>
+      <div class="ab"><p>Click any block above to read its role.</p></div>
     </div>
   </div>
 
@@ -1025,7 +1071,7 @@ footer b{color:var(--pri)}
     <div class="braille-layout">
       <div class="braille-panel">
         <h4 style="font-size:.9rem;margin-bottom:6px">⠿ Interactive Cell</h4>
-        <p style="font-size:.75rem;color:var(--muted);margin-bottom:14px">Dots numbered 1–3 left column, 4–6 right column.</p>
+        <p style="font-size:.75rem;color:var(--muted);margin-bottom:14px">Dots numbered 1–3 left, 4–6 right.</p>
         <div class="braille-cell" id="q8-brailleCell">
           <div class="b-dot" data-d="1">1</div><div class="b-dot" data-d="4">4</div>
           <div class="b-dot" data-d="2">2</div><div class="b-dot" data-d="5">5</div>
@@ -1036,14 +1082,13 @@ footer b{color:var(--pri)}
       </div>
       <div class="braille-panel">
         <h4 style="font-size:.9rem;margin-bottom:6px">🔤 Alphabet Reference</h4>
-        <p style="font-size:.75rem;color:var(--muted);margin-bottom:14px">Click a letter.</p>
         <div class="letter-grid" id="q8-letterGrid"></div>
       </div>
     </div>
   </div>
 
   <div class="qpanel" id="q8-sim">
-    <div class="sec-head"><h2><span class="bar"></span>Workflow Simulator</h2><p>Step through a full hands-free task.</p></div>
+    <div class="sec-head"><h2><span class="bar"></span>Workflow Simulator</h2></div>
     <div class="sim-box">
       <div class="q-top" style="margin-bottom:14px"><h3>▶️ End-to-End Task</h3><span class="score-pill" id="q8-simStatus">Ready</span></div>
       <div class="task-pick" id="q8-taskPick"></div>
@@ -1066,11 +1111,679 @@ footer b{color:var(--pri)}
   </div>
 </div>
 
+<!-- ===================================================== -->
+<!-- ============ 📖 SIMPLE NOTES TAB ==================== -->
+<!-- ===================================================== -->
+<div class="qwrap notes-wrap" id="notes">
+  <nav class="stabbar"><div class="stabs" data-for="notes">
+    <button class="stab active" data-p="notes-start"><span class="ic">🏠</span>Start Here</button>
+    <button class="stab" data-p="notes-q1"><span class="ic">1</span>Characteristics</button>
+    <button class="stab" data-p="notes-q2"><span class="ic">2</span>Block Diagram</button>
+    <button class="stab" data-p="notes-q3"><span class="ic">3</span>Scanners &amp; Cards</button>
+    <button class="stab" data-p="notes-q4"><span class="ic">4</span>Languages</button>
+    <button class="stab" data-p="notes-q5"><span class="ic">5</span>Input Devices</button>
+    <button class="stab" data-p="notes-q6"><span class="ic">6</span>Output Systems</button>
+    <button class="stab" data-p="notes-q7"><span class="ic">7</span>Biometrics</button>
+    <button class="stab" data-p="notes-q8"><span class="ic">8</span>Accessible PC</button>
+  </div></nav>
+
+  <!-- NOTES: START -->
+  <div class="qpanel active" id="notes-start">
+    <div class="sec-head">
+      <h2><span class="bar"></span>📖 Simple Notes — Easy-to-Understand Version</h2>
+    </div>
+    <p class="notes-subtitle">Eight questions explained in plain language — with exam-ready answers.</p>
+
+    <div class="notes-card">
+      <h3 class="notes-h3" style="margin-top:0">How to use this section</h3>
+      <ul style="padding-left:22px;font-size:.88rem;color:var(--muted)">
+        <li>Each tab above is one question, written in <strong>simple words</strong>.</li>
+        <li>Look for the <strong style="color:#1e40af">blue "In Simple Words"</strong> boxes — they explain the idea without jargon.</li>
+        <li>Look for the <strong style="color:#047857">green "Exam Answer"</strong> boxes — ready to write in your exam.</li>
+        <li>Tables and numbered steps are designed for quick revision.</li>
+      </ul>
+    </div>
+
+    <h3 class="notes-h3">📋 Questions Covered</h3>
+    <div class="grid g2">
+      <div class="notes-mini-card"><h4>Q1 — Characteristics & Generations</h4><p>Four things every computer does well, and how computers evolved from 1940 to today.</p></div>
+      <div class="notes-mini-card"><h4>Q2 — Block Diagram</h4><p>How data, instructions and control signals move between CPU, memory and I/O.</p></div>
+      <div class="notes-mini-card"><h4>Q3 — Scanners & Card Readers</h4><p>How barcodes, OMR, RFID and smart cards are used on a campus.</p></div>
+      <div class="notes-mini-card"><h4>Q4 — Language Categories</h4><p>Why machine language is fast but hard, and high-level languages are easy but slower.</p></div>
+      <div class="notes-mini-card"><h4>Q5 — Input Devices</h4><p>Why a mouse moves by "relative" motion, but a tablet knows exact position.</p></div>
+      <div class="notes-mini-card"><h4>Q6 — Output Systems</h4><p>Plotter vs monitor + printer for engineering blueprints.</p></div>
+      <div class="notes-mini-card"><h4>Q7 — Biometrics</h4><p>Face recognition vs voice recognition — which works in noisy public places.</p></div>
+      <div class="notes-mini-card"><h4>Q8 — Accessible Computer</h4><p>How to design a computer for a blind user using voice, Braille and speech.</p></div>
+    </div>
+
+    <div class="notes-callout tip">
+      <strong>💡 Study Tip</strong>
+      Read the "In Simple Words" box first. Then read the main explanation. Then check the "Exam Answer" box at the end to see how to write it in your paper.
+    </div>
+  </div>
+
+  <!-- NOTES: Q1 -->
+  <div class="qpanel" id="notes-q1">
+    <div class="sec-head"><h2><span class="bar"></span>Q1 — Characteristics &amp; Generations<span class="qbadge">Simple Notes</span></h2></div>
+    <p class="notes-subtitle"><strong>Keywords:</strong> List, Identify | Four characteristics + five generations of hardware.</p>
+
+    <h3 class="notes-h3">Part A — Four Characteristics of a Modern Computer</h3>
+    <p style="font-size:.88rem;color:var(--muted)">Every computer — phone, laptop or supercomputer — shares these four qualities.</p>
+
+    <div class="grid g2">
+      <div class="notes-mini-card"><h4>1. Speed</h4><p>A computer can do millions of calculations in one second. A task that would take a human years is done in seconds.</p></div>
+      <div class="notes-mini-card"><h4>2. Accuracy</h4><p>The computer gives the correct answer every time — <strong>but only if the input is correct</strong>. Wrong data in = wrong data out.</p></div>
+      <div class="notes-mini-card"><h4>3. Storage &amp; Diligence</h4><p>It can store huge amounts of data and never gets tired, bored or distracted — no matter how long it works.</p></div>
+      <div class="notes-mini-card"><h4>4. Versatility &amp; Automation</h4><p>The same machine can do many different tasks. Once programmed, it runs on its own without help.</p></div>
+    </div>
+
+    <div class="notes-simple">
+      <strong>In Simple Words</strong>
+      A computer is <strong>fast</strong>, <strong>accurate</strong>, has a <strong>good memory</strong>, and can <strong>do many jobs automatically</strong>. But it has no brain of its own — it only follows instructions.
+    </div>
+
+    <div class="notes-callout remember">
+      <strong>Remember — GIGO</strong>
+      <strong>G</strong>arbage <strong>I</strong>n = <strong>G</strong>arbage <strong>O</strong>ut. If you give the computer wrong data, it will give you a wrong answer — even though it calculated perfectly.
+    </div>
+
+    <h3 class="notes-h3">Part B — Five Generations of Computers</h3>
+    <p style="font-size:.88rem;color:var(--muted)">Computers changed a lot between 1940 and today. Each major change in hardware started a new "generation".</p>
+
+    <div class="notes-gen-list">
+      <div class="notes-gen-item" style="border-left-color:#ef4444">
+        <h4><span class="notes-gen-num" style="background:#ef4444">1</span> First Generation <span class="period">1940 – 1956</span></h4>
+        <p>Huge machines the size of a room. Used vacuum tubes (glass tubes that got very hot). Very slow and expensive.</p>
+        <p><strong>Examples:</strong> ENIAC, UNIVAC I</p>
+        <span class="notes-key-tech">Key Hardware: Vacuum Tubes</span>
+      </div>
+      <div class="notes-gen-item" style="border-left-color:#f59e0b">
+        <h4><span class="notes-gen-num" style="background:#f59e0b">2</span> Second Generation <span class="period">1956 – 1963</span></h4>
+        <p>Transistors replaced vacuum tubes. Much smaller, faster, cheaper and more reliable. First programming languages appeared.</p>
+        <p><strong>Examples:</strong> IBM 1401, CDC 1604</p>
+        <span class="notes-key-tech">Key Hardware: Transistors</span>
+      </div>
+      <div class="notes-gen-item" style="border-left-color:#10b981">
+        <h4><span class="notes-gen-num" style="background:#10b981">3</span> Third Generation <span class="period">1964 – 1971</span></h4>
+        <p>Integrated Circuits (ICs) put many transistors on one small chip. Computers became affordable for businesses.</p>
+        <p><strong>Examples:</strong> IBM System/360, PDP-8</p>
+        <span class="notes-key-tech">Key Hardware: Integrated Circuits (ICs)</span>
+      </div>
+      <div class="notes-gen-item" style="border-left-color:#3b82f6">
+        <h4><span class="notes-gen-num" style="background:#3b82f6">4</span> Fourth Generation <span class="period">1971 – 1980s</span></h4>
+        <p>The whole CPU was put on one chip (microprocessor). This made the Personal Computer (PC) possible.</p>
+        <p><strong>Examples:</strong> Intel 4004, IBM PC, Apple Macintosh</p>
+        <span class="notes-key-tech">Key Hardware: Microprocessors (LSI / VLSI)</span>
+      </div>
+      <div class="notes-gen-item" style="border-left-color:#8b5cf6">
+        <h4><span class="notes-gen-num" style="background:#8b5cf6">5</span> Fifth Generation <span class="period">1980s – Present</span></h4>
+        <p>Today's computers. Focus on Artificial Intelligence — machines that understand speech, recognise images and learn.</p>
+        <p><strong>Examples:</strong> Smartphones, IBM Watson, AI assistants</p>
+        <span class="notes-key-tech">Key Hardware: ULSI &amp; Artificial Intelligence</span>
+      </div>
+    </div>
+
+    <div class="notes-simple">
+      <strong>In Simple Words</strong>
+      Each generation changed the <strong>main electronic part</strong> inside the computer: <strong>vacuum tube → transistor → IC → microprocessor → ULSI/AI</strong>. Every change made computers smaller, faster and cheaper.
+    </div>
+
+    <h3 class="notes-h3">Quick Comparison Table</h3>
+    <div class="notes-table-wrap">
+      <table class="notes-table">
+        <thead><tr><th>Gen</th><th>Period</th><th>Key Hardware</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td>1st</td><td>1940–1956</td><td>Vacuum Tubes</td><td>ENIAC, UNIVAC I</td></tr>
+          <tr><td>2nd</td><td>1956–1963</td><td>Transistors</td><td>IBM 1401</td></tr>
+          <tr><td>3rd</td><td>1964–1971</td><td>Integrated Circuits</td><td>IBM System/360</td></tr>
+          <tr><td>4th</td><td>1971–1980s</td><td>Microprocessors</td><td>IBM PC</td></tr>
+          <tr><td>5th</td><td>1980s–Now</td><td>ULSI &amp; AI</td><td>Smartphones, AI</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="notes-exam">
+      <strong>✅ Exam Answer (Write this)</strong>
+      The four primary characteristics of a modern digital computer are: <strong>Speed</strong> (performs millions of calculations per second), <strong>Accuracy</strong> (gives 100% correct results if input is correct), <strong>Storage &amp; Diligence</strong> (stores huge data and never tires), and <strong>Versatility &amp; Automation</strong> (does many tasks and runs automatically once programmed).
+      <br><br>
+      The five generations of computers and their key hardware are: 1st Generation — <strong>Vacuum Tubes</strong>, 2nd Generation — <strong>Transistors</strong>, 3rd Generation — <strong>Integrated Circuits (ICs)</strong>, 4th Generation — <strong>Microprocessors</strong>, and 5th Generation — <strong>ULSI and Artificial Intelligence</strong>.
+    </div>
+  </div>
+
+  <!-- NOTES: Q2 -->
+  <div class="qpanel" id="notes-q2">
+    <div class="sec-head"><h2><span class="bar"></span>Q2 — Block Diagram of a Computer<span class="qbadge">Simple Notes</span></h2></div>
+    <p class="notes-subtitle"><strong>Keyword:</strong> Explain | Flow of data, instructions and control signals.</p>
+
+    <h3 class="notes-h3">The Five Main Blocks</h3>
+    <p style="font-size:.88rem;color:var(--muted)">Think of them as five departments working together.</p>
+
+    <div class="grid g2">
+      <div class="notes-mini-card"><h4>🧠 CPU (Brain)</h4><p>Does all the thinking and calculating. Contains CU, ALU and Registers.</p></div>
+      <div class="notes-mini-card"><h4>💾 Memory Unit</h4><p>Stores both the data and the instructions currently being used.</p></div>
+      <div class="notes-mini-card"><h4>⌨️ Input Unit</h4><p>Takes raw data from the user (keyboard, mouse, scanner).</p></div>
+      <div class="notes-mini-card"><h4>🖥️ Output Unit</h4><p>Shows the result to the user (monitor, printer).</p></div>
+    </div>
+    <p style="font-size:.88rem;color:var(--muted);margin-top:14px">The fifth block is the <strong>System Bus</strong> — the wires that connect all units together.</p>
+
+    <h3 class="notes-h3">The Three Types of Flow</h3>
+    <div class="notes-table-wrap">
+      <table class="notes-table">
+        <thead><tr><th>Type of Flow</th><th>What It Carries</th><th>Direction</th></tr></thead>
+        <tbody>
+          <tr><td>🔵 Data Flow</td><td>The actual information (numbers, text, images)</td><td>Both ways (bidirectional)</td></tr>
+          <tr><td>🟠 Instruction Flow</td><td>Commands telling the CPU what to do</td><td>Memory → CPU</td></tr>
+          <tr><td>🟣 Control Signals</td><td>Read, Write, Interrupt, Clock, Reset</td><td>Control Unit → everyone else</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="notes-simple">
+      <strong>In Simple Words</strong>
+      Think of a classroom. <strong>Data</strong> is the homework paper passing back and forth. <strong>Instructions</strong> are the teacher telling you what to do. <strong>Control signals</strong> are the bell and the timetable that keep everything organised.
+    </div>
+
+    <h3 class="notes-h3">The Instruction Cycle</h3>
+    <ol class="notes-steps">
+      <li><strong>FETCH</strong> — The CPU asks memory for the next instruction.</li>
+      <li><strong>DECODE</strong> — The Control Unit figures out what the instruction means.</li>
+      <li><strong>EXECUTE</strong> — The ALU or another unit performs the operation.</li>
+      <li><strong>STORE</strong> — The result is saved back into a register or memory.</li>
+    </ol>
+
+    <div class="notes-flow">
+      <div class="notes-flow-box" style="background:#38bdf8">FETCH</div>
+      <div class="notes-flow-arrow">→</div>
+      <div class="notes-flow-box" style="background:#f59e0b">DECODE</div>
+      <div class="notes-flow-arrow">→</div>
+      <div class="notes-flow-box" style="background:#10b981">EXECUTE</div>
+      <div class="notes-flow-arrow">→</div>
+      <div class="notes-flow-box" style="background:#8b5cf6">STORE</div>
+    </div>
+
+    <h3 class="notes-h3">The Three Buses — A Simple Way to Remember</h3>
+    <div class="notes-table-wrap">
+      <table class="notes-table">
+        <thead><tr><th>Bus</th><th>What It Carries</th><th>Direction</th></tr></thead>
+        <tbody>
+          <tr><td>Data Bus</td><td>Actual data and instructions</td><td>Both ways</td></tr>
+          <tr><td>Address Bus</td><td>Address of memory location</td><td>One way (CPU → Memory)</td></tr>
+          <tr><td>Control Bus</td><td>Commands from Control Unit</td><td>One way (CU → all)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="notes-callout remember">
+      <strong>Easy Way to Remember</strong>
+      <strong>Data</strong> goes both ways. <strong>Address</strong> only goes out. <strong>Control</strong> only goes out. This single rule answers most exam questions on buses.
+    </div>
+
+    <div class="notes-exam">
+      <strong>✅ Exam Answer (Write this)</strong>
+      The block diagram of a computer consists of five units — <strong>CPU</strong> (Control Unit, ALU and Registers), <strong>Memory Unit</strong>, <strong>Input Unit</strong>, <strong>Output Unit</strong> and the <strong>System Bus</strong> which connects them.
+      <br><br>
+      <strong>Data</strong> flows both ways on the Data Bus between CPU and memory. <strong>Instructions</strong> flow from memory to CPU, are decoded by the Control Unit, and executed by the ALU. <strong>Control signals</strong> (Read, Write, Interrupt) flow from the Control Unit to every other unit. The CPU repeatedly performs the <strong>fetch–decode–execute–store</strong> cycle to run programs.
+    </div>
+  </div>
+
+  <!-- NOTES: Q3 -->
+  <div class="qpanel" id="notes-q3">
+    <div class="sec-head"><h2><span class="bar"></span>Q3 — Scanning &amp; Card Reading Hardware<span class="qbadge">Simple Notes</span></h2></div>
+    <p class="notes-subtitle"><strong>Keyword:</strong> Demonstrate | How campuses automate attendance and library.</p>
+
+    <h3 class="notes-h3">Part A — Optical Scanners</h3>
+    <p style="font-size:.88rem;color:var(--muted)">These devices read information by shining light on a surface and looking at the reflected pattern.</p>
+
+    <div class="grid g2">
+      <div class="notes-mini-card"><h4>▥ Barcode Scanner (1D)</h4><p>Reads the black-and-white bars on a label. Used on library books and ID cards. Range: 5–30 cm.</p></div>
+      <div class="notes-mini-card"><h4>▦ QR / 2D Scanner</h4><p>Reads square codes that hold much more data. Can be read from any angle. Used for event check-in.</p></div>
+      <div class="notes-mini-card"><h4>◉ OMR Scanner</h4><p>Reads pencil marks in circles on answer sheets. Very fast — up to 10,000 sheets per hour.</p></div>
+      <div class="notes-mini-card"><h4>Aa OCR Scanner</h4><p>Reads printed or written text and converts it into editable digital text.</p></div>
+    </div>
+
+    <h3 class="notes-h3">Part B — Card Readers</h3>
+    <div class="grid g2">
+      <div class="notes-mini-card"><h4>📡 RFID Reader</h4><p>Reads cards without contact. Works from a few cm up to 12 metres (UHF). Backbone of campus attendance.</p></div>
+      <div class="notes-mini-card"><h4>📲 NFC Reader</h4><p>Works only at ~4 cm — you must tap deliberately. Ideal for canteen payments.</p></div>
+      <div class="notes-mini-card"><h4>💳 Smart Card Reader</h4><p>Has a tiny computer chip inside. Very secure. Used for library cards and hostel access.</p></div>
+      <div class="notes-mini-card"><h4>▬ Magnetic Stripe Reader</h4><p>Old technology. You swipe the card through a slot. Cheap but easily copied.</p></div>
+    </div>
+
+    <div class="notes-simple">
+      <strong>In Simple Words</strong>
+      Optical scanners <strong>look</strong> at a pattern (bars, dots, text). Card readers <strong>listen</strong> to a chip or antenna — either by touching or by reading from a small distance.
+    </div>
+
+    <h3 class="notes-h3">How RFID Works (5 Simple Steps)</h3>
+    <ol class="notes-steps">
+      <li>The reader sends out a magnetic field (like a radio signal).</li>
+      <li>The card has no battery, but the field creates a small current inside it — so the chip wakes up.</li>
+      <li>The chip sends its unique ID number back to the reader.</li>
+      <li>The reader passes the ID to the computer system.</li>
+      <li>The system checks the database and marks attendance or opens the door.</li>
+    </ol>
+
+    <div class="notes-callout note">
+      <strong>Why This is Better Than a Paper Register</strong>
+      A single RFID reader can log 60+ students per minute with zero manual effort. No signatures to forge. No registers to lose. Everything is saved automatically.
+    </div>
+
+    <h3 class="notes-h3">Campus Applications</h3>
+    <div class="notes-table-wrap">
+      <table class="notes-table">
+        <thead><tr><th>Location</th><th>Device Used</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>Main Gate</td><td>UHF RFID</td><td>Vehicle entry, staff attendance</td></tr>
+          <tr><td>Classroom</td><td>HF RFID</td><td>Student attendance — tap the card</td></tr>
+          <tr><td>Library</td><td>Barcode + Smart Card</td><td>Book issue and return</td></tr>
+          <tr><td>Exam Hall</td><td>OMR Scanner</td><td>Bulk answer sheet evaluation</td></tr>
+          <tr><td>Canteen</td><td>NFC Reader</td><td>Tap-to-pay for food</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="notes-exam">
+      <strong>✅ Exam Answer (Write this)</strong>
+      In a campus environment, optical scanning devices and electronic card readers can automate student attendance and library checkouts.
+      <br><br>
+      <strong>For attendance:</strong> A student taps their RFID card at the classroom door. The reader detects the card's unique ID, the system checks it against the database, and attendance is recorded instantly with a timestamp. No manual roll call is needed.
+      <br><br>
+      <strong>For library checkout:</strong> The librarian scans the student's smart card (identifying the student) and then scans the book's barcode (identifying the book). The library software links the two records, sets a due date, and generates a receipt automatically. OMR scanners are used for bulk exam paper evaluation, and NFC readers handle canteen payments.
+    </div>
+  </div>
+
+  <!-- NOTES: Q4 -->
+  <div class="qpanel" id="notes-q4">
+    <div class="sec-head"><h2><span class="bar"></span>Q4 — Computer Language Categories<span class="qbadge">Simple Notes</span></h2></div>
+    <p class="notes-subtitle"><strong>Keyword:</strong> Distinguish | Low-level vs high-level languages.</p>
+
+    <h3 class="notes-h3">The Two Big Families</h3>
+    <ul style="padding-left:22px;font-size:.88rem;color:var(--muted);margin-bottom:14px">
+      <li><strong>Low-level languages</strong> — Very close to the machine (Machine Language and Assembly Language).</li>
+      <li><strong>High-level languages</strong> — Very close to human thinking (C, Java, Python).</li>
+    </ul>
+
+    <div class="notes-simple">
+      <strong>In Simple Words</strong>
+      <strong>Low-level</strong> = talking to the computer in its own language (0s and 1s or short codes). <strong>High-level</strong> = talking to the computer in a language that looks like English.
+    </div>
+
+    <h3 class="notes-h3">The Two Low-Level Languages</h3>
+    <div class="grid g2">
+      <div class="notes-mini-card"><h4>1. Machine Language</h4><p>Pure binary (0s and 1s). The only language the CPU really understands. <strong>No translation needed.</strong></p></div>
+      <div class="notes-mini-card"><h4>2. Assembly Language</h4><p>Uses short codes like <code>MOV</code>, <code>ADD</code>, <code>HLT</code> instead of binary. Needs an <strong>assembler</strong> to convert to machine language.</p></div>
+    </div>
+
+    <h3 class="notes-h3">Comparison Across Four Points</h3>
+    <div class="notes-table-wrap">
+      <table class="notes-table">
+        <thead><tr><th>Point</th><th>Machine</th><th>Assembly</th><th>High-Level</th></tr></thead>
+        <tbody>
+          <tr><td>Execution Speed</td><td>Fastest</td><td>Very fast</td><td>Slower</td></tr>
+          <tr><td>Hardware Dependence</td><td>Total (one CPU only)</td><td>Very high</td><td>Low (portable)</td></tr>
+          <tr><td>Translation Needed</td><td>None</td><td>Assembler</td><td>Compiler / Interpreter</td></tr>
+          <tr><td>Programming Complexity</td><td>Extremely hard</td><td>Hard</td><td>Easy</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="notes-h3">The Three Translators</h3>
+    <div class="grid g2">
+      <div class="notes-mini-card"><h4>🔧 Assembler</h4><p>Converts Assembly Language to Machine Code. One line of assembly = one machine instruction.</p></div>
+      <div class="notes-mini-card"><h4>⚙️ Compiler</h4><p>Converts the <strong>whole program</strong> at once into an executable file. Fast at runtime. Used by C, C++.</p></div>
+      <div class="notes-mini-card"><h4>▶️ Interpreter</h4><p>Converts and runs the program <strong>line by line</strong>. Slower, but easier to debug. Used by Python.</p></div>
+    </div>
+
+    <div class="notes-callout remember">
+      <strong>Remember This Rule</strong>
+      <strong>Compiler = whole program at once.</strong> <strong>Interpreter = one line at a time.</strong> If your exam asks which is faster — the compiled program runs faster, but the compiler takes longer to produce the result.
+    </div>
+
+    <h3 class="notes-h3">Same Task in Three Languages</h3>
+    <p style="font-size:.88rem;color:var(--muted)">Here is how you would add 3 + 5 in each language.</p>
+
+    <div class="notes-card">
+      <h4 class="notes-h4">Machine Language (Binary)</h4>
+      <div class="notes-code">1011 0000 0000 0011   ; MOV AL, 3
+0000 0100 0000 0101   ; ADD AL, 5
+1111 0100             ; HLT</div>
+
+      <h4 class="notes-h4">Assembly Language</h4>
+      <div class="notes-code">MOV  AL, 3       ; load 3 into AL
+ADD  AL, 5       ; add 5 → AL = 8
+HLT              ; stop</div>
+
+      <h4 class="notes-h4">High-Level (Python)</h4>
+      <div class="notes-code">result = 3 + 5
+print(result)</div>
+    </div>
+
+    <div class="notes-exam">
+      <strong>✅ Exam Answer (Write this)</strong>
+      Low-level languages (Machine and Assembly) are hardware-dependent, run at maximum speed, and require little or no translation — but are extremely difficult to write. Machine language is pure binary and needs no translator. Assembly uses mnemonics and needs an assembler.
+      <br><br>
+      High-level languages (C, Java, Python) are hardware-independent and portable, require a compiler or interpreter, run slightly slower than low-level code, and are far easier to write, read and debug. Because they use English-like keywords and hide hardware details, they are the standard for modern software development.
+    </div>
+  </div>
+
+  <!-- NOTES: Q5 -->
+  <div class="qpanel" id="notes-q5">
+    <div class="sec-head"><h2><span class="bar"></span>Q5 — Point-and-Draw vs Graphics Tablets<span class="qbadge">Simple Notes</span></h2></div>
+    <p class="notes-subtitle"><strong>Keyword:</strong> Compare | Coordinate tracking and pressure sensitivity.</p>
+
+    <h3 class="notes-h3">Two Families of Devices</h3>
+    <div class="notes-compare">
+      <div class="left">
+        <h4>🖱️ Point-and-Draw Devices</h4>
+        <ul><li>Mouse</li><li>Trackball</li><li>Touchpad</li><li>Joystick</li></ul>
+      </div>
+      <div class="right">
+        <h4>✍️ Graphics Tablets / Digitizers</h4>
+        <ul><li>Pen tablet (no screen)</li><li>Pen display (draw on screen)</li><li>Large-format digitizer</li></ul>
+      </div>
+    </div>
+
+    <h3 class="notes-h3">The Key Difference: How They Track Position</h3>
+    <div class="grid g2">
+      <div class="notes-mini-card"><h4>Relative Tracking (Mouse)</h4><p>The device reports only <strong>how far you moved</strong> — a delta. The cursor position is the sum of all deltas.</p></div>
+      <div class="notes-mini-card"><h4>Absolute Tracking (Tablet)</h4><p>The device reports <strong>exactly where you are</strong> on the pad. The cursor jumps to that mapped point.</p></div>
+    </div>
+
+    <div class="notes-simple">
+      <strong>In Simple Words</strong>
+      A mouse says: "You moved 3 cm to the right." A tablet says: "You are touching the top-left corner." <strong>Relative = how far. Absolute = where.</strong>
+    </div>
+
+    <h3 class="notes-h3">Pressure Sensitivity — The Second Big Difference</h3>
+    <div class="notes-compare">
+      <div class="left">
+        <h4>Mouse Button</h4>
+        <ul>
+          <li>Only two states: <strong>pressed</strong> or <strong>not pressed</strong></li>
+          <li>Just one bit of information</li>
+          <li>Cannot vary brush size or opacity</li>
+        </ul>
+      </div>
+      <div class="right">
+        <h4>Tablet Stylus</h4>
+        <ul>
+          <li><strong>1,024 to 8,192 pressure levels</strong></li>
+          <li>Also detects tilt and rotation</li>
+          <li>Can vary brush size, opacity, line thickness</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="notes-h3">How a Graphics Tablet Detects the Pen (EMR)</h3>
+    <ol class="notes-steps">
+      <li>The tablet has a grid of wires under its surface that send out a radio signal.</li>
+      <li>The pen has a small circuit inside that absorbs this signal and sends it back.</li>
+      <li>The tablet detects which wires receive the strongest signal — that tells it exactly where the pen is.</li>
+      <li>A pressure sensor in the tip changes the signal strength based on how hard you press.</li>
+      <li>The tablet translates this into pressure levels and sends it to the software.</li>
+    </ol>
+
+    <div class="notes-callout note">
+      <strong>Why the Pen Has No Battery</strong>
+      The pen gets all its power from the tablet's field. That is why most professional pens are very light and never need charging.
+    </div>
+
+    <h3 class="notes-h3">CAD vs Digital Art — Which is Better?</h3>
+    <div class="notes-table-wrap">
+      <table class="notes-table">
+        <thead><tr><th>Application</th><th>Best Choice</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>CAD — Tracing blueprints</td><td>Large digitizer</td><td>Absolute coordinates = every point on pad maps to a known coordinate.</td></tr>
+          <tr><td>CAD — Menu navigation</td><td>Mouse or trackball</td><td>Faster for clicking toolbars and scrolling.</td></tr>
+          <tr><td>Digital Art — Painting</td><td>Pen display / tablet</td><td>Pressure sensitivity + natural grip = realistic brush strokes.</td></tr>
+          <tr><td>Digital Art — Sketching</td><td>Pen display</td><td>You draw directly on the screen — no hand-eye gap.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="notes-exam">
+      <strong>✅ Exam Answer (Write this)</strong>
+      Point-and-draw devices (mouse, trackball) use <strong>relative coordinate tracking</strong> — they report movement as a delta, so the cursor moves by accumulated displacement. They offer <strong>no pressure sensitivity</strong>, giving only on/off button input. This makes them ideal for general navigation, menu selection and menu-driven CAD work.
+      <br><br>
+      Graphics tablets and digitizers use <strong>absolute coordinate tracking</strong> with an electromagnetic grid — the cursor jumps to the exact mapped position. They provide <strong>1,024 to 8,192 pressure levels plus tilt and rotation</strong>, allowing natural brush control. This makes them the professional standard for digital art and precision tracing in CAD.
+    </div>
+  </div>
+
+  <!-- NOTES: Q6 -->
+  <div class="qpanel" id="notes-q6">
+    <div class="sec-head"><h2><span class="bar"></span>Q6 — Plotter vs Monitor + Printer<span class="qbadge">Simple Notes</span></h2></div>
+    <p class="notes-subtitle"><strong>Keywords:</strong> Assess, Justify | Line resolution, scalability, cost.</p>
+
+    <h3 class="notes-h3">The Two Options Being Compared</h3>
+    <div class="notes-compare">
+      <div class="left">
+        <h4>🖨️ Drum / Flatbed Plotter</h4>
+        <ul>
+          <li>Draws true vector lines</li>
+          <li>Uses pens or toner</li>
+          <li>Only produces paper</li>
+        </ul>
+      </div>
+      <div class="right">
+        <h4>🖥️ Ultra-HD Monitor + Large-Format Printer</h4>
+        <ul>
+          <li>Digital-first workflow</li>
+          <li>Review and revise on screen</li>
+          <li>Print only when needed</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="notes-h3">Criterion 1 — Line Resolution</h3>
+    <div class="notes-card">
+      <p><strong>Plotter:</strong> Draws continuous mathematical lines (true vector). Stays perfectly sharp at any zoom — no pixels to see.</p>
+      <p><strong>Inkjet Printer:</strong> Prints at 2400 × 1200 dpi. This is far finer than the human eye can see at normal reading distance. Slight softness appears only at extreme zoom.</p>
+      <p style="margin-bottom:0"><strong>Verdict:</strong> Plotter is technically superior — but for normal blueprint viewing, the difference is invisible.</p>
+    </div>
+
+    <h3 class="notes-h3">Criterion 2 — Scalability</h3>
+    <div class="notes-card">
+      <p><strong>Plotter:</strong> Limited to the width of its roll. Cannot display drawings — only prints them. Every revision requires a full reprint.</p>
+      <p><strong>Monitor + Printer:</strong> Displays any drawing instantly at any size. Team members can review simultaneously. Revisions are made to the digital file at near-zero cost, then printed only when needed.</p>
+      <p style="margin-bottom:0"><strong>Verdict:</strong> Monitor + printer wins decisively.</p>
+    </div>
+
+    <h3 class="notes-h3">Criterion 3 — Long-Term Production Cost</h3>
+    <div class="notes-card">
+      <p><strong>Plotter:</strong> High capital cost, but very low cost per sheet (₹15–₹22 per A1 sheet). At very high volumes, this wins.</p>
+      <p><strong>Inkjet Printer:</strong> Lower capital, but higher cost per sheet (₹35–₹60 per A1).</p>
+      <p style="margin-bottom:0"><strong>Verdict:</strong> Depends on volume. Low volume → printer wins. Very high volume → plotter wins.</p>
+    </div>
+
+    <div class="notes-simple">
+      <strong>In Simple Words</strong>
+      If you print a few hundred sheets a month, use the monitor + printer. If you print thousands, the plotter's lower cost per sheet eventually pays for its higher price.
+    </div>
+
+    <h3 class="notes-h3">Summary Table</h3>
+    <div class="notes-table-wrap">
+      <table class="notes-table">
+        <thead><tr><th>Criterion</th><th>Plotter</th><th>Monitor + Printer</th></tr></thead>
+        <tbody>
+          <tr><td>Line Resolution</td><td>True vector — perfect at any zoom</td><td>2400 dpi — sufficient</td></tr>
+          <tr><td>Scalability</td><td>Limited to roll width</td><td>Any size, instant revision, digital distribution</td></tr>
+          <tr><td>Cost at Low Volume</td><td>Higher</td><td>Lower</td></tr>
+          <tr><td>Cost at Very High Volume</td><td>Lower</td><td>Higher</td></tr>
+          <tr><td>Collaboration</td><td>Share paper copies</td><td>Simultaneous on-screen review</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="notes-exam">
+      <strong>✅ Exam Answer (Write this)</strong>
+      On assessment of the three criteria, the <strong>ultra-high-definition monitor with a large-format printer is superior</strong> for the majority of civil engineering blueprint production because: (1) its line resolution of 2400 dpi is already more than sufficient for the application; (2) its scalability across sheet sizes and revisions is far greater — any drawing can be displayed instantly and revised at near-zero cost; and (3) its long-term production cost is lower at realistic practice volumes.
+      <br><br>
+      A drum plotter remains preferable only in specific cases — when print volume is very high (lower cost per sheet) or when true vector archival output is contractually required.
+    </div>
+  </div>
+
+  <!-- NOTES: Q7 -->
+  <div class="qpanel" id="notes-q7">
+    <div class="sec-head"><h2><span class="bar"></span>Q7 — Face vs Voice Biometrics<span class="qbadge">Simple Notes</span></h2></div>
+    <p class="notes-subtitle"><strong>Keyword:</strong> Critique | Reliability and security in noisy, public places.</p>
+
+    <h3 class="notes-h3">The Scenario</h3>
+    <p style="font-size:.88rem;color:var(--muted)">We are comparing two biometric authentication methods being used in a place like a railway station, stadium or busy campus gate. The environment has two problems:</p>
+    <ul style="padding-left:22px;font-size:.88rem;color:var(--muted);margin-bottom:14px">
+      <li><strong>High ambient noise</strong> — lots of sound from crowds, traffic, announcements.</li>
+      <li><strong>Publicly exposed</strong> — no guard watching, unpredictable lighting, weather, and anyone can attempt to spoof the system.</li>
+    </ul>
+
+    <h3 class="notes-h3">How Each System Works</h3>
+    <div class="notes-compare">
+      <div class="left">
+        <h4>👁️ Facial Recognition</h4>
+        <ul>
+          <li>Uses a camera (RGB + NIR + 3D depth)</li>
+          <li>Maps your face into a mathematical pattern</li>
+          <li>Compares it against a stored template</li>
+        </ul>
+      </div>
+      <div class="right">
+        <h4>🎙️ Voice Recognition</h4>
+        <ul>
+          <li>Uses a microphone (or array of mics)</li>
+          <li>Extracts spectral features from your speech</li>
+          <li>Compares against a stored voice template</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="notes-h3">Criterion 1 — Reliability in High Noise</h3>
+    <div class="notes-card">
+      <p><strong>Facial Recognition:</strong> Totally unaffected by sound. A camera does not care how loud the room is.</p>
+      <p><strong>Voice Recognition:</strong> Falls apart as noise increases. At 70 dB accuracy drops to ~88%. At 85 dB, only ~74%. Above 100 dB, it becomes useless.</p>
+      <p style="margin-bottom:0"><strong>Winner:</strong> Facial recognition — by a large margin.</p>
+    </div>
+
+    <div class="notes-simple">
+      <strong>In Simple Words</strong>
+      Noise is added directly on top of your voice. At 80 dB (a busy street), your voice and the noise are nearly the same strength — the system can no longer "hear" the details it needs to identify you.
+    </div>
+
+    <h3 class="notes-h3">Criterion 2 — Reliability in Bright or Dark Conditions</h3>
+    <div class="notes-card">
+      <p><strong>Facial Recognition:</strong> A hardened system with NIR (near-infrared) works in complete darkness. But in <strong>direct sunlight</strong>, the sun's infrared energy overwhelms the NIR sensor and liveness detection stops working.</p>
+      <p><strong>Voice Recognition:</strong> Completely unaffected by light — works day or night.</p>
+      <p style="margin-bottom:0"><strong>Winner:</strong> Voice in darkness, Face in bright conditions — a tie overall.</p>
+    </div>
+
+    <h3 class="notes-h3">Criterion 3 — Security Against Spoofing</h3>
+    <div class="notes-table-wrap">
+      <table class="notes-table">
+        <thead><tr><th>Attack</th><th>Face</th><th>Voice</th></tr></thead>
+        <tbody>
+          <tr><td>Printed photo</td><td>Blocked by 3D depth</td><td>—</td></tr>
+          <tr><td>Screen replay</td><td>Blocked by depth + moiré detection</td><td>—</td></tr>
+          <tr><td>3D silicone mask</td><td>Partially blocked</td><td>—</td></tr>
+          <tr><td>Virtual camera injection</td><td>Defeats most systems</td><td>—</td></tr>
+          <tr><td>Audio replay</td><td>—</td><td>Frequently succeeds</td></tr>
+          <tr><td>Neural TTS (fake voice)</td><td>—</td><td>Frequently succeeds</td></tr>
+          <tr><td>Coerced live speech</td><td>—</td><td>Undetectable</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="notes-callout note">
+      <strong>Key Insight</strong>
+      A face spoof requires the attacker to be physically present with a mask or screen. A voice spoof can be delivered <strong>remotely</strong> — a 5-second recording played through any speaker. This makes voice attacks far more scalable.
+    </div>
+
+    <h3 class="notes-h3">Criterion 4 — Privacy and Legal Issues</h3>
+    <div class="notes-card">
+      <p><strong>Facial Recognition:</strong> Very high concern. Face data can be captured covertly from a distance without consent. Once a template is leaked, it can never be changed — you cannot get a new face.</p>
+      <p><strong>Voice Recognition:</strong> Less regulated, easier to consent to, harder to capture without the person knowing.</p>
+      <p style="margin-bottom:0"><strong>Winner:</strong> Voice — on privacy grounds only.</p>
+    </div>
+
+    <div class="notes-exam">
+      <strong>✅ Exam Answer (Write this)</strong>
+      Under high ambient noise in a publicly exposed environment, <strong>facial recognition with near-infrared and 3D depth sensing is more operationally reliable than voice recognition</strong>, because acoustic interference is physically irrelevant to an optical sensor, while voice accuracy falls below usable thresholds above approximately 70 dB.
+      <br><br>
+      However, facial recognition carries greater privacy and legal exposure and is vulnerable to 3D mask and virtual-camera injection attacks, while voice recognition is defeated by simple replay.
+      <br><br>
+      <strong>Therefore neither should serve as the sole biometric authenticator.</strong> A layered architecture combining face as the primary factor with a possession or knowledge factor, on-device liveness detection, and secure-element template storage is the defensible deployment.
+    </div>
+  </div>
+
+  <!-- NOTES: Q8 -->
+  <div class="qpanel" id="notes-q8">
+    <div class="sec-head"><h2><span class="bar"></span>Q8 — Hands-Free Workstation for a Blind User<span class="qbadge">Simple Notes</span></h2></div>
+    <p class="notes-subtitle"><strong>Keyword:</strong> Design | An accessible computer using voice and Braille.</p>
+
+    <h3 class="notes-h3">The Design Goal</h3>
+    <p style="font-size:.88rem;color:var(--muted)">Design a computer workstation for a blind user that requires <strong>no eyes</strong> and <strong>no hands on a keyboard</strong> — everything is done by voice and by touch.</p>
+
+    <div class="notes-simple">
+      <strong>In Simple Words</strong>
+      A sighted user reads the screen and clicks with a mouse. A blind user must <strong>hear</strong> the screen and <strong>speak</strong> their commands. Everything the screen shows must be delivered through sound or touch.
+    </div>
+
+    <h3 class="notes-h3">Input Devices (How the user talks TO the computer)</h3>
+    <div class="grid g2">
+      <div class="notes-mini-card"><h4>🎙️ Voice Recognition (Primary)</h4><p>The main way to control the computer. The user speaks commands like "Open email" or "Read message". Requires no hands, no eyes, no pointing.</p></div>
+      <div class="notes-mini-card"><h4>⠿ Braille Keyboard (Secondary)</h4><p>An 8-key keyboard where the user types Braille characters by pressing multiple keys at once. Silent and precise. Used for spelling, punctuation and code.</p></div>
+      <div class="notes-mini-card"><h4>🎛️ Switch / Sip-and-Puff (Fallback)</h4><p>A single switch (operated by head, foot or breath) that scans through options one by one. The user activates the switch when the desired option is reached. Used only if voice and hands are unavailable.</p></div>
+    </div>
+
+    <h3 class="notes-h3">Output Devices (How the computer talks BACK to the user)</h3>
+    <div class="grid g2">
+      <div class="notes-mini-card"><h4>🧠 Screen Reader</h4><p>Software that reads what is on the screen. It decides what to announce and in what order. Works with any application that uses the OS accessibility API.</p></div>
+      <div class="notes-mini-card"><h4>🔊 Speech Synthesizer</h4><p>Turns text into spoken words. Expert users listen at 300–500 words per minute — much faster than normal speech.</p></div>
+      <div class="notes-mini-card"><h4>⠿ Refreshable Braille Display</h4><p>A row of 40–80 cells with pins that rise and fall to form Braille characters. Silent, precise, and essential for spelling, punctuation and code.</p></div>
+      <div class="notes-mini-card"><h4>📳 Haptic Feedback</h4><p>Small vibrations that confirm actions. A short pulse = success. Two pulses = error. These reduce the need for constant speech.</p></div>
+    </div>
+
+    <h3 class="notes-h3">The Six Design Principles</h3>
+    <ol class="notes-steps">
+      <li><strong>Voice First</strong> — Every function must be reachable by spoken command. No pointing required.</li>
+      <li><strong>Multiple Output Channels</strong> — Speech, Braille and haptics work in parallel. If one fails, another still works.</li>
+      <li><strong>Tactile Grounding</strong> — Braille is essential for anything voice cannot disambiguate (spelling, code, math).</li>
+      <li><strong>Redundant Control</strong> — If the microphone fails, the Braille keyboard still works. If the Braille display fails, speech still works.</li>
+      <li><strong>Reversibility</strong> — Every destructive action must be confirmed by voice and must be undoable.</li>
+      <li><strong>User-Controlled Pacing</strong> — Speech rate, verbosity and key echo must all be adjustable at any moment.</li>
+    </ol>
+
+    <h3 class="notes-h3">How the System Works — A Complete Example</h3>
+    <p style="font-size:.88rem;color:var(--muted)">Here is what happens when a blind user wants to write and send an email:</p>
+    <ol class="notes-steps">
+      <li>The user says a wake phrase. The microphone array confirms by vibrating softly.</li>
+      <li>The user says "Open email". The screen reader announces: "Mail. 3 unread."</li>
+      <li>The user says "Compose new". The editor opens and the user's voice switches to dictation mode.</li>
+      <li>The user speaks the message. The Braille display shows each word for silent verification. If a word is ambiguous (like a name), the user types it on the Braille keyboard.</li>
+      <li>The user says "Send". Because sending is permanent, the system reads the message back and asks for confirmation.</li>
+      <li>The user says "Yes". Two short vibrations confirm success, and the screen reader announces: "Message sent."</li>
+    </ol>
+
+    <div class="notes-callout note">
+      <strong>Why This Design Works</strong>
+      The system is a <strong>closed loop</strong>. Every action the user takes produces immediate feedback through sound or touch. Nothing happens silently. Every action can be undone. This is what makes a non-visual interface trustworthy.
+    </div>
+
+    <div class="notes-exam">
+      <strong>✅ Exam Answer (Write this)</strong>
+      An accessible hands-free workstation for a visually impaired user integrates non-visual input devices with specialised output devices.
+      <br><br>
+      <strong>For input</strong>, the primary device is a <strong>voice recognition system</strong> with a far-field microphone array — this is the only input that fully satisfies the hands-free requirement. The secondary device is a <strong>tactile Braille keyboard</strong>, used for precision tasks like spelling, punctuation and code. A <strong>switch or sip-and-puff device</strong> provides fallback input when voice and hands are both unavailable.
+      <br><br>
+      <strong>For output</strong>, the system uses four channels in parallel: a <strong>screen reader</strong> that interprets the interface, a <strong>speech synthesizer</strong> for audible feedback, a <strong>refreshable Braille display</strong> for silent and precise text, and <strong>haptic feedback</strong> for instant confirmation.
+      <br><br>
+      The design follows six principles: voice-first input, multimodal output, tactile grounding, redundant control, reversibility of every action, and user-controlled pacing. All these devices connect through the operating system's accessibility API, allowing any compliant application to be operated entirely without sight.
+    </div>
+  </div>
+
+</div>
+
 </main>
 
 <footer>
   Prepared by <b>Rahul</b> • Roll No. <b>1826075</b> • Course: <b>BPT</b> • Year: <b>1st Year</b><br>
-  Computer Fundamentals — Complete Assignment (Q1–Q8)
+  Computer Fundamentals — Complete Assignment (Interactive + Simple Notes)
 </footer>
 
 <script>
@@ -1127,13 +1840,13 @@ document.addEventListener('keydown', e=>{
 
 /* ============ DASHBOARD CARDS ============ */
 const dashQs = [
-  { q:'q1', icon:'⭐', grad:'linear-gradient(135deg,#ef4444,#b91c1c)', title:'Q1 — Computer Characteristics & Generations', desc:'Four primary characteristics and the key hardware of each generation.', kw:['List','Identify'] },
-  { q:'q2', icon:'🧱', grad:'linear-gradient(135deg,#2563eb,#7c3aed)', title:'Q2 — Block Diagram & System Architecture', desc:'Data, instruction and control signal flow between CPU, memory and I/O.', kw:['Explain'] },
-  { q:'q3', icon:'🪪', grad:'linear-gradient(135deg,#059669,#047857)', title:'Q3 — Scanning & Card Reading Hardware', desc:'Barcode, OMR, RFID and smart card deployment for campus automation.', kw:['Demonstrate'] },
-  { q:'q4', icon:'💻', grad:'linear-gradient(135deg,#8b5cf6,#6d28d9)', title:'Q4 — Low-Level vs High-Level Languages', desc:'Execution speed, hardware dependence, translation and complexity.', kw:['Distinguish'] },
-  { q:'q5', icon:'🖌️', grad:'linear-gradient(135deg,#0891b2,#0e7490)', title:'Q5 — Point-and-Draw vs Graphics Tablets', desc:'Coordinate tracking and pressure sensitivity for CAD and digital art.', kw:['Compare'] },
-  { q:'q6', icon:'🖨️', grad:'linear-gradient(135deg,#d97706,#b45309)', title:'Q6 — Plotters vs Monitor + Printer', desc:'Line resolution, scalability and long-term cost for blueprints.', kw:['Assess','Justify'] },
-  { q:'q7', icon:'🎭', grad:'linear-gradient(135deg,#dc2626,#991b1b)', title:'Q7 — Face vs Voice Biometrics', desc:'Reliability and security in high-noise, publicly exposed environments.', kw:['Critique'] },
+  { q:'q1', icon:'⭐', grad:'linear-gradient(135deg,#ef4444,#b91c1c)', title:'Q1 — Characteristics & Generations', desc:'Four characteristics and five generations of hardware.', kw:['List','Identify'] },
+  { q:'q2', icon:'🧱', grad:'linear-gradient(135deg,#2563eb,#7c3aed)', title:'Q2 — Block Diagram & Architecture', desc:'Data, instruction and control flow between CPU, memory and I/O.', kw:['Explain'] },
+  { q:'q3', icon:'🪪', grad:'linear-gradient(135deg,#059669,#047857)', title:'Q3 — Scanning & Card Reading Hardware', desc:'Barcode, OMR, RFID and smart cards on campus.', kw:['Demonstrate'] },
+  { q:'q4', icon:'💻', grad:'linear-gradient(135deg,#8b5cf6,#6d28d9)', title:'Q4 — Low-Level vs High-Level Languages', desc:'Speed, hardware dependence, translation and complexity.', kw:['Distinguish'] },
+  { q:'q5', icon:'🖌️', grad:'linear-gradient(135deg,#0891b2,#0e7490)', title:'Q5 — Point-and-Draw vs Graphics Tablets', desc:'Coordinate tracking and pressure sensitivity.', kw:['Compare'] },
+  { q:'q6', icon:'🖨️', grad:'linear-gradient(135deg,#d97706,#b45309)', title:'Q6 — Plotters vs Monitor + Printer', desc:'Resolution, scalability and long-term cost.', kw:['Assess','Justify'] },
+  { q:'q7', icon:'🎭', grad:'linear-gradient(135deg,#dc2626,#991b1b)', title:'Q7 — Face vs Voice Biometrics', desc:'Reliability and security in hostile environments.', kw:['Critique'] },
   { q:'q8', icon:'⠿', grad:'linear-gradient(135deg,#db2777,#9d174d)', title:'Q8 — Hands-Free Accessible Workstation', desc:'Non-visual input and specialized output integration.', kw:['Design'] }
 ];
 const qgrid = document.getElementById('qgrid');
@@ -1246,11 +1959,11 @@ q1Chars.forEach(c=>{
 });
 
 const q1Gens = [
-  { n:1, name:'First Generation', yrs:'1940–1956', tech:'Vacuum Tubes', mem:'Magnetic drums (few KB)', io:'Punched cards, paper tape', ex:'ENIAC, EDVAC, UNIVAC I', lang:'Machine language', size:'Room-sized, very expensive', speed:'≈5,000 additions/sec', fact:'ENIAC had <b>18,000 vacuum tubes</b>, weighed 30 tonnes, consumed 150 kW.' },
-  { n:2, name:'Second Generation', yrs:'1956–1963', tech:'Transistors', mem:'Magnetic core, tape, disk', io:'Punched cards, magnetic tape', ex:'IBM 1401, CDC 1604', lang:'Assembly, FORTRAN, COBOL', size:'Smaller, cheaper, less heat', speed:'Microseconds (1000× faster)', fact:'<b>Transistors</b> made computers smaller, faster, cheaper and far more reliable.' },
-  { n:3, name:'Third Generation', yrs:'1964–1971', tech:'Integrated Circuits (ICs)', mem:'Magnetic disk, IC memory', io:'Keyboard, monitor, printers', ex:'IBM System/360, PDP-8', lang:'High-level + OS', size:'Smaller, more reliable', speed:'Nanoseconds (SSI/MSI chips)', fact:'<b>ICs</b> packed many transistors on one chip and introduced <b>multiprogramming</b>.' },
-  { n:4, name:'Fourth Generation', yrs:'1971–1980s', tech:'Microprocessors (LSI/VLSI)', mem:'RAM/ROM, floppy, hard disk', io:'Keyboard, mouse, monitor, GUI', ex:'Intel 4004, IBM PC, Macintosh', lang:'C, C++, Pascal, GUI', size:'Personal computers — cheap', speed:'Millions of transistors per chip', fact:'The whole CPU on <b>one microprocessor chip</b> made the PC possible.' },
-  { n:5, name:'Fifth Generation', yrs:'1980s–Present', tech:'ULSI & Artificial Intelligence', mem:'High-density RAM, SSD, cloud', io:'Touch, voice, VR/AR', ex:'IBM Watson, smartphones, AI', lang:'Python, Java, AI frameworks', size:'Ultra-compact, ubiquitous', speed:'ULSI, multicore, parallel', fact:'Focus on <b>Artificial Intelligence</b> — natural language, speech, image recognition.' }
+  { n:1, name:'First Generation', yrs:'1940–1956', tech:'Vacuum Tubes', grad:'linear-gradient(135deg,#ef4444,#b91c1c)', mem:'Magnetic drums (few KB)', io:'Punched cards, paper tape', ex:'ENIAC, EDVAC, UNIVAC I', lang:'Machine language', size:'Room-sized, very expensive', speed:'≈5,000 additions/sec', fact:'ENIAC had <b>18,000 vacuum tubes</b>, weighed 30 tonnes, consumed 150 kW.' },
+  { n:2, name:'Second Generation', yrs:'1956–1963', tech:'Transistors', grad:'linear-gradient(135deg,#f59e0b,#b45309)', mem:'Magnetic core, tape, disk', io:'Punched cards, magnetic tape', ex:'IBM 1401, CDC 1604', lang:'Assembly, FORTRAN, COBOL', size:'Smaller, cheaper, less heat', speed:'Microseconds (1000× faster)', fact:'<b>Transistors</b> made computers smaller, faster, cheaper and far more reliable.' },
+  { n:3, name:'Third Generation', yrs:'1964–1971', tech:'Integrated Circuits (ICs)', grad:'linear-gradient(135deg,#10b981,#047857)', mem:'Magnetic disk, IC memory', io:'Keyboard, monitor, printers', ex:'IBM System/360, PDP-8', lang:'High-level + OS', size:'Smaller, more reliable', speed:'Nanoseconds (SSI/MSI chips)', fact:'<b>ICs</b> packed many transistors on one chip and introduced <b>multiprogramming</b>.' },
+  { n:4, name:'Fourth Generation', yrs:'1971–1980s', tech:'Microprocessors (LSI/VLSI)', grad:'linear-gradient(135deg,#3b82f6,#1d4ed8)', mem:'RAM/ROM, floppy, hard disk', io:'Keyboard, mouse, monitor, GUI', ex:'Intel 4004, IBM PC, Macintosh', lang:'C, C++, Pascal, GUI', size:'Personal computers — cheap', speed:'Millions of transistors per chip', fact:'The whole CPU on <b>one microprocessor chip</b> made the PC possible.' },
+  { n:5, name:'Fifth Generation', yrs:'1980s–Present', tech:'ULSI & Artificial Intelligence', grad:'linear-gradient(135deg,#8b5cf6,#6d28d9)', mem:'High-density RAM, SSD, cloud', io:'Touch, voice, VR/AR', ex:'IBM Watson, smartphones, AI', lang:'Python, Java, AI frameworks', size:'Ultra-compact, ubiquitous', speed:'ULSI, multicore, parallel', fact:'Focus on <b>Artificial Intelligence</b> — natural language, speech, image recognition.' }
 ];
 const q1Timeline = document.getElementById('q1-timeline');
 const q1GenDetail = document.getElementById('q1-genDetail');
@@ -1268,7 +1981,7 @@ q1Gens.forEach((g, i)=>{
 function renderQ1Gen(i){
   const g = q1Gens[i];
   q1GenDetail.innerHTML = `
-    <div class="card" style="border-top:5px solid ${g.grad ? g.grad.match(/#[0-9a-f]{6}/i)[0] : '#ef4444'};animation:fade .35s">
+    <div class="card" style="border-top:5px solid ${g.grad.match(/#[0-9a-f]{6}/i)[0]};animation:fade .35s">
       <h3 style="font-size:1.05rem;margin-bottom:6px">${g.name} <span style="color:var(--muted);font-weight:600;font-size:.85rem">${g.yrs}</span></h3>
       <span class="tag g" style="margin-bottom:14px;display:inline-block">🔑 ${g.tech}</span>
       <div class="grid g3" style="margin-top:10px">
@@ -1319,9 +2032,7 @@ const q1Right = document.getElementById('q1-matchRight');
 const q1Score = document.getElementById('q1-matchScore');
 const q1MatchResult = document.getElementById('q1-matchResult');
 let q1SelL = null, q1SelR = null, q1Matched = 0, q1Lock = false;
-
 function q1Shuffle(a){ const x=[...a]; for(let i=x.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[x[i],x[j]]=[x[j],x[i]];} return x; }
-
 function q1BuildMatch(){
   q1Left.innerHTML = ''; q1Right.innerHTML = '';
   q1Matched = 0; q1SelL = null; q1SelR = null; q1Lock = false;
@@ -1369,12 +2080,11 @@ function q1Select(el, side){
 q1BuildMatch();
 document.getElementById('q1-matchReset').addEventListener('click', q1BuildMatch);
 
-/* Q1 Quiz */
 buildQuiz('q1', [
-  { q:'Which hardware technology is the hallmark of the FIRST generation?', opts:['Transistors','Vacuum tubes','Integrated circuits','Microprocessors'], a:1, exp:'1st gen (1940–1956) used vacuum tubes — e.g. ENIAC.' },
-  { q:'The THIRD generation is identified with which key hardware technology?', opts:['Magnetic drums','Transistors','Integrated Circuits (ICs)','AI'], a:2, exp:'3rd gen (1964–1971) used ICs — many transistors on one chip.' },
-  { q:'Which generation introduced the MICROPROCESSOR?', opts:['Second','Third','Fourth','Fifth'], a:2, exp:'4th gen (1971 onwards) put the whole CPU on a single microprocessor chip.' },
-  { q:'A computer never gets tired or bored. This characteristic is called:', opts:['Versatility','Diligence','Accuracy','Speed'], a:1, exp:'Diligence means the computer can work continuously without losing concentration.' },
+  { q:'Which hardware technology is the hallmark of the FIRST generation?', opts:['Transistors','Vacuum tubes','Integrated circuits','Microprocessors'], a:1, exp:'1st gen (1940–1956) used vacuum tubes.' },
+  { q:'The THIRD generation is identified with which key hardware technology?', opts:['Magnetic drums','Transistors','Integrated Circuits (ICs)','AI'], a:2, exp:'3rd gen (1964–1971) used ICs.' },
+  { q:'Which generation introduced the MICROPROCESSOR?', opts:['Second','Third','Fourth','Fifth'], a:2, exp:'4th gen put the whole CPU on a single microprocessor chip.' },
+  { q:'A computer never gets tired or bored. This characteristic is called:', opts:['Versatility','Diligence','Accuracy','Speed'], a:1, exp:'Diligence means the computer can work continuously.' },
   { q:'GIGO relates to which characteristic?', opts:['Accuracy','Storage','Automation','Versatility'], a:0, exp:'A computer is 100% accurate — but only if the input is correct.' },
   { q:'Which technology is associated with the FIFTH generation?', opts:['Vacuum tubes','Magnetic core','ULSI & AI','Punched cards'], a:2, exp:'5th gen is built on ULSI, multicore and AI.' }
 ]);
@@ -1383,12 +2093,12 @@ buildQuiz('q1', [
    Q2 — BLOCK DIAGRAM
    ========================================================= */
 const q2BlkInfo = {
-  cpu:{ tag:'Processor', title:'Central Processing Unit', grad:'linear-gradient(135deg,#2563eb,#7c3aed)', role:'The brain. Fetches, decodes, executes, stores. Contains CU, ALU and Registers.', parts:[['CU','Decodes instructions, generates control signals'],['ALU','Arithmetic and logic operations'],['Registers','PC, IR, MAR, MBR, ACC — fastest storage']] },
-  memory:{ tag:'Primary Storage', title:'Memory Unit (RAM/ROM)', grad:'linear-gradient(135deg,#0891b2,#0e7490)', role:'Stores BOTH data and program instructions. Each location has a unique address.', parts:[['RAM','Read/Write, volatile'],['ROM','Read-only, non-volatile, holds bootstrap'],['Cache','Fast buffer between CPU and RAM']] },
-  input:{ tag:'Peripheral', title:'Input Unit', grad:'linear-gradient(135deg,#059669,#047857)', role:'Accepts raw data, converts to binary, sends to CPU or memory.', parts:[['Keyboard / Mouse','Text, commands, pointer'],['Scanner / Camera','Images to digital'],['Mic / Sensors','Analog → digital via ADC']] },
-  output:{ tag:'Peripheral', title:'Output Unit', grad:'linear-gradient(135deg,#d97706,#b45309)', role:'Takes the processed binary result and converts it back to human-readable form.', parts:[['Monitor','Soft copy on screen'],['Printer','Permanent hard copy'],['Speaker / Projector','Audio and large-format visual']] },
-  io:{ tag:'Controller', title:'I/O Interface', grad:'linear-gradient(135deg,#8b5cf6,#5b21b6)', role:'Bridges fast system bus and slow peripherals.', parts:[['Buffering','Absorbs speed differences'],['Signal Conversion','Digital ⇄ analog, serial ⇄ parallel'],['Address Decoding','Identifies target device']] },
-  secondary:{ tag:'Auxiliary', title:'Secondary Storage', grad:'linear-gradient(135deg,#db2777,#9d174d)', role:'Permanent, non-volatile storage. Slower than RAM but far larger.', parts:[['HDD','Magnetic platters'],['SSD','Flash — very fast'],['Pen Drive / Cloud','Portable and remote']] }
+  cpu:{ tag:'Processor', title:'Central Processing Unit', grad:'linear-gradient(135deg,#2563eb,#7c3aed)', role:'The brain. Fetches, decodes, executes, stores.', parts:[['CU','Decodes instructions'],['ALU','Arithmetic and logic'],['Registers','PC, IR, MAR, MBR, ACC']] },
+  memory:{ tag:'Primary Storage', title:'Memory Unit (RAM/ROM)', grad:'linear-gradient(135deg,#0891b2,#0e7490)', role:'Stores BOTH data and instructions.', parts:[['RAM','Read/Write, volatile'],['ROM','Read-only, non-volatile'],['Cache','Fast buffer between CPU and RAM']] },
+  input:{ tag:'Peripheral', title:'Input Unit', grad:'linear-gradient(135deg,#059669,#047857)', role:'Accepts raw data and converts it to binary.', parts:[['Keyboard / Mouse','Text, commands'],['Scanner / Camera','Images'],['Mic / Sensors','Analog → digital']] },
+  output:{ tag:'Peripheral', title:'Output Unit', grad:'linear-gradient(135deg,#d97706,#b45309)', role:'Converts binary result back to human-readable.', parts:[['Monitor','Soft copy'],['Printer','Hard copy'],['Speaker','Audio']] },
+  io:{ tag:'Controller', title:'I/O Interface', grad:'linear-gradient(135deg,#8b5cf6,#5b21b6)', role:'Bridges fast bus and slow peripherals.', parts:[['Buffering','Speed matching'],['Signal Conversion','Digital ⇄ analog'],['Address Decoding','Identifies device']] },
+  secondary:{ tag:'Auxiliary', title:'Secondary Storage', grad:'linear-gradient(135deg,#db2777,#9d174d)', role:'Permanent non-volatile storage.', parts:[['HDD','Magnetic platters'],['SSD','Flash'],['Pen Drive / Cloud','Portable']] }
 };
 document.querySelectorAll('#q2-blockLayer .blk').forEach(b=>{
   b.addEventListener('click', ()=>{
@@ -1396,10 +2106,7 @@ document.querySelectorAll('#q2-blockLayer .blk').forEach(b=>{
     if(!info) return;
     document.querySelectorAll('#q2-blockLayer .blk').forEach(x=>x.classList.remove('active'));
     b.classList.add('active');
-    document.getElementById('q2-side').innerHTML = `
-      <div class="ah" style="background:${info.grad}"><span class="tag">${info.tag}</span><h3>${info.title}</h3></div>
-      <div class="ab"><p>${info.role}</p><h4>Parts</h4>
-      <ul class="kv-list">${info.parts.map(p=>`<li><b>${p[0]}</b><span>${p[1]}</span></li>`).join('')}</ul></div>`;
+    document.getElementById('q2-side').innerHTML = `<div class="ah" style="background:${info.grad}"><span class="tag">${info.tag}</span><h3>${info.title}</h3></div><div class="ab"><p>${info.role}</p><h4>Parts</h4><ul class="kv-list">${info.parts.map(p=>`<li><b>${p[0]}</b><span>${p[1]}</span></li>`).join('')}</ul></div>`;
   });
 });
 const q2Flows = [
@@ -1415,7 +2122,6 @@ const q2Flows = [
   { mode:'addr', color:'#34d399', dur:3.4, d:'M 480 210 L 480 272 L 120 272 L 120 380' }
 ];
 const q2FlowLayer = document.getElementById('q2-flowLayer');
-const q2Svg = document.getElementById('q2-svg');
 const SVGNS = 'http://www.w3.org/2000/svg';
 q2Flows.forEach(f=>{
   const g = document.createElementNS(SVGNS, 'g');
@@ -1455,11 +2161,11 @@ document.querySelectorAll('#q2-modeBar button').forEach(b=>{
 q2FlowLayer.querySelectorAll('.flow').forEach(g=>g.style.display = 'none');
 
 buildQuiz('q2', [
-  { q:'Which unit of the CPU decodes instructions and generates control signals?', opts:['ALU','Control Unit','Memory Unit','Accumulator'], a:1, exp:'The Control Unit fetches and decodes instructions and generates control signals.' },
-  { q:'Which bus carries the address of the memory location?', opts:['Data Bus','Control Bus','Address Bus','System Clock'], a:2, exp:'The Address Bus is unidirectional — CPU → memory.' },
+  { q:'Which unit of the CPU decodes instructions and generates control signals?', opts:['ALU','Control Unit','Memory Unit','Accumulator'], a:1, exp:'The Control Unit fetches and decodes instructions.' },
+  { q:'Which bus carries the address of the memory location?', opts:['Data Bus','Control Bus','Address Bus','System Clock'], a:2, exp:'The Address Bus is unidirectional.' },
   { q:'The Data Bus differs from the Address Bus because it is:', opts:['Unidirectional','Bidirectional','Only for control','Slower'], a:1, exp:'The Data Bus is bidirectional.' },
   { q:'In the instruction cycle, which stage comes immediately after FETCH?', opts:['Execute','Store','Decode','Interrupt'], a:2, exp:'Cycle is FETCH → DECODE → EXECUTE → STORE.' },
-  { q:'Which register holds the address of the NEXT instruction?', opts:['IR','MBR','PC','ACC'], a:2, exp:'Program Counter holds the next instruction address.' },
+  { q:'Which register holds the address of the NEXT instruction?', opts:['IR','MBR','PC','ACC'], a:2, exp:'Program Counter.' },
   { q:'Which is NOT a function of the I/O interface?', opts:['Data buffering','Signal conversion','Arithmetic operations','Address decoding'], a:2, exp:'Arithmetic is done by the ALU.' }
 ]);
 
@@ -1467,16 +2173,16 @@ buildQuiz('q2', [
    Q3 — SCANNING & CARD READERS
    ========================================================= */
 const q3Optical = [
-  { title:'1D Barcode Scanner', sub:'Laser · Linear codes', grad:'linear-gradient(135deg,#2563eb,#1d4ed8)', icon:'▥', intro:'Laser beam sweeps across varying-width bars. Photodiode measures reflected light, decoded to a string.', specs:[['Principle','Laser reflection / CCD'],['Symbologies','EAN-13, UPC-A, Code 128'],['Range','5–30 cm'],['Read Time','≈300 ms'],['Capacity','~48 characters'],['Interface','USB, RS-232']], uses:['Library labels','Student ID cards','Inventory'] },
-  { title:'2D / QR Scanner', sub:'CMOS · Matrix codes', grad:'linear-gradient(135deg,#0891b2,#0e7490)', icon:'▦', intro:'CMOS camera captures full image; software decodes the matrix. Stores far more data, readable from any angle.', specs:[['Principle','CMOS + software decode'],['Symbologies','QR, Data Matrix, PDF417'],['Range','5–50 cm'],['Read Time','≈200 ms'],['Capacity','~4,000 characters'],['Error Correction','Reed–Solomon 30%']], uses:['Event check-in','Digital ID','Wi-Fi onboarding'] },
-  { title:'OMR Scanner', sub:'Optical Mark Recognition', grad:'linear-gradient(135deg,#8b5cf6,#6d28d9)', icon:'◉', intro:'Detects presence/absence of a mark in a predefined position. Does not read characters — extremely fast.', specs:[['Principle','Reflected light on marked positions'],['Input','MCQ sheets, attendance'],['Throughput','1,000–10,000/hr'],['Read Time','≈50 ms/sheet'],['Accuracy','>99.9%'],['Requirement','HB pencil / dark ink']], uses:['Exam evaluation','Bulk attendance','Feedback forms'] },
-  { title:'OCR Scanner', sub:'Optical Character Recognition', grad:'linear-gradient(135deg,#059669,#047857)', icon:'Aa', intro:'Captures image of text and converts it to machine-editable characters using pattern recognition.', specs:[['Principle','Image + pattern recognition'],['Input','Scanned pages, PDFs'],['Output','Editable text'],['Read Time','1–3 s/page'],['Accuracy','99%+ on clean text'],['Languages','100+']], uses:['Digitising forms','Archiving certificates','Library catalogues'] }
+  { title:'1D Barcode Scanner', sub:'Laser · Linear codes', grad:'linear-gradient(135deg,#2563eb,#1d4ed8)', icon:'▥', intro:'Laser beam sweeps across bars. Photodiode measures reflected light.', specs:[['Principle','Laser reflection'],['Range','5–30 cm'],['Read Time','≈300 ms'],['Capacity','~48 characters']], uses:['Library labels','Student ID cards','Inventory'] },
+  { title:'2D / QR Scanner', sub:'CMOS · Matrix codes', grad:'linear-gradient(135deg,#0891b2,#0e7490)', icon:'▦', intro:'CMOS camera captures full image; software decodes the matrix.', specs:[['Principle','CMOS + software'],['Range','5–50 cm'],['Read Time','≈200 ms'],['Capacity','~4,000 characters']], uses:['Event check-in','Digital ID','Wi-Fi onboarding'] },
+  { title:'OMR Scanner', sub:'Optical Mark Recognition', grad:'linear-gradient(135deg,#8b5cf6,#6d28d9)', icon:'◉', intro:'Detects presence/absence of a mark in a predefined position.', specs:[['Principle','Reflected light'],['Throughput','1,000–10,000/hr'],['Read Time','≈50 ms/sheet'],['Accuracy','>99.9%']], uses:['Exam evaluation','Bulk attendance','Feedback forms'] },
+  { title:'OCR Scanner', sub:'Optical Character Recognition', grad:'linear-gradient(135deg,#059669,#047857)', icon:'Aa', intro:'Captures image of text and converts to editable characters.', specs:[['Principle','Image + pattern'],['Output','Editable text'],['Read Time','1–3 s/page'],['Accuracy','99%+ on clean text']], uses:['Digitising forms','Archiving certificates','Library catalogues'] }
 ];
 const q3Cards = [
-  { title:'RFID Reader', sub:'Radio Frequency Identification', grad:'linear-gradient(135deg,#2563eb,#7c3aed)', icon:'📡', intro:'Electromagnetic fields identify passive tags. Backbone of campus attendance.', specs:[['Principle','EM induction'],['Bands','LF 125kHz · HF 13.56MHz · UHF 860–960MHz'],['Range','10cm (HF) to 12m (UHF)'],['Read Time','<100 ms'],['Standards','ISO 14443, ISO 15693'],['Multi-tag','200 tags/sec']], uses:['Classroom attendance','Gate access','Library books','Asset tracking'] },
-  { title:'NFC Reader', sub:'Near Field Communication', grad:'linear-gradient(135deg,#d97706,#b45309)', icon:'📲', intro:'Subset of HF RFID with 4 cm range. Two-way communication — ideal for payments.', specs:[['Principle','EM induction 13.56 MHz'],['Range','≤4 cm'],['Read Time','<100 ms'],['Standards','ISO 18092, NFC Forum'],['Modes','Card emulation, reader/writer'],['Security','Encrypted tokens']], uses:['Canteen payments','Phone-based ID','Event passes'] },
-  { title:'Smart Card Reader', sub:'Microprocessor + contact/RF', grad:'linear-gradient(135deg,#0891b2,#0e7490)', icon:'💳', intro:'Contains a microprocessor for cryptographic authentication.', specs:[['Principle','Contact or RF'],['Range','0 cm contact · 10 cm contactless'],['Read Time','250 ms · <100 ms'],['Memory','1 KB – 256 KB + MPU'],['Security','Mutual auth, encryption'],['Durability','10+ years']], uses:['Library membership','Hostel/lab access','Exams ID'] },
-  { title:'Magnetic Stripe Reader', sub:'Legacy · Swipe cards', grad:'linear-gradient(135deg,#64748b,#334155)', icon:'▬', intro:'Data stored in magnetisation pattern. Read head picks up changing flux. Cheap but easily copied.', specs:[['Principle','Magnetic flux change'],['Tracks','1, 2, 3'],['Read Time','≈500 ms'],['Capacity','~220 chars/track'],['Security','Low — easily duplicated']], uses:['Legacy ID cards','Older library cards','ATM cards'] }
+  { title:'RFID Reader', sub:'Radio Frequency Identification', grad:'linear-gradient(135deg,#2563eb,#7c3aed)', icon:'📡', intro:'Electromagnetic fields identify passive tags. Backbone of campus attendance.', specs:[['Principle','EM induction'],['Bands','LF/HF/UHF'],['Range','10 cm to 12 m'],['Read Time','<100 ms']], uses:['Classroom attendance','Gate access','Library books'] },
+  { title:'NFC Reader', sub:'Near Field Communication', grad:'linear-gradient(135deg,#d97706,#b45309)', icon:'📲', intro:'Subset of HF RFID with 4 cm range. Two-way communication.', specs:[['Principle','EM induction 13.56 MHz'],['Range','≤4 cm'],['Read Time','<100 ms'],['Security','Encrypted tokens']], uses:['Canteen payments','Phone-based ID','Event passes'] },
+  { title:'Smart Card Reader', sub:'Microprocessor + contact/RF', grad:'linear-gradient(135deg,#0891b2,#0e7490)', icon:'💳', intro:'Contains a microprocessor for cryptographic authentication.', specs:[['Principle','Contact or RF'],['Range','0–10 cm'],['Memory','1 KB – 256 KB + MPU'],['Durability','10+ years']], uses:['Library membership','Hostel/lab access','Exams ID'] },
+  { title:'Magnetic Stripe Reader', sub:'Legacy · Swipe cards', grad:'linear-gradient(135deg,#64748b,#334155)', icon:'▬', intro:'Data stored in magnetisation pattern. Read head picks up flux changes.', specs:[['Principle','Magnetic flux change'],['Tracks','1, 2, 3'],['Read Time','≈500 ms'],['Security','Low — easily copied']], uses:['Legacy ID cards','Older library cards','ATM cards'] }
 ];
 function renderDevCards(list, cid){
   const c = document.getElementById(cid);
@@ -1535,7 +2241,7 @@ buildQuiz('q3', [
   { q:'Which device reads pencil marks on MCQ sheets?', opts:['Barcode','OMR','OCR','RFID'], a:1, exp:'OMR detects presence/absence of a mark.' },
   { q:'A passive RFID tag is powered by:', opts:['Battery','Solar','EM induction from reader','USB'], a:2, exp:'Passive tags harvest power from the reader field.' },
   { q:'Which offers the shortest deliberate range for canteen payments?', opts:['UHF RFID','NFC','1D barcode','OMR'], a:1, exp:'NFC works at 13.56 MHz with ~4 cm range.' },
-  { q:'In library checkout, which device identifies the BOOK?', opts:['Smart card','Barcode','OMR','NFC'], a:1, exp:'Student by smart card; book by barcode.' },
+  { q:'In library checkout, which device identifies the BOOK?', opts:['Smart card','Barcode','OMR','NFC'], a:1, exp:'Book by barcode; student by smart card.' },
   { q:'Main advantage of smart card over magnetic stripe?', opts:['Cheaper','Microprocessor for secure auth','Works without reader','Unlimited data'], a:1, exp:'Onboard microprocessor enables cryptographic authentication.' },
   { q:'Why is RFID preferred over barcode for classroom attendance?', opts:['Cheaper','Reads hands-free at distance without line-of-sight','No power','Barcodes cannot store IDs'], a:1, exp:'RFID reads from a bag or wallet without line-of-sight.' }
 ]);
@@ -1544,11 +2250,11 @@ buildQuiz('q3', [
    Q4 — LANGUAGE CATEGORIES
    ========================================================= */
 const q4SegData = {
-  machine:{ title:'Machine Language', grad:'linear-gradient(135deg,#dc2626,#7f1d1d)', desc:'The only language a CPU truly understands — pure binary.', kv:[['Speed','Fastest'],['Hardware','Total dependence'],['Translation','None'],['Complexity','Extreme']] },
-  assembly:{ title:'Assembly Language', grad:'linear-gradient(135deg,#f59e0b,#b45309)', desc:'Short mnemonics (MOV, ADD) and symbolic names. Assembler required.', kv:[['Speed','Very fast'],['Hardware','Very high'],['Translation','Assembler'],['Complexity','High']] },
-  high1:{ title:'High-Level (C, C++, Java)', grad:'linear-gradient(135deg,#10b981,#047857)', desc:'English-like syntax, portable, compiler produces native code.', kv:[['Speed','Fast (compiled)'],['Hardware','Low'],['Translation','Compiler'],['Complexity','Moderate']] },
-  high2:{ title:'Very High-Level (Python, SQL)', grad:'linear-gradient(135deg,#3b82f6,#1d4ed8)', desc:'Even more abstracted. Usually interpreted.', kv:[['Speed','Slower'],['Hardware','Very low'],['Translation','Interpreter/VM'],['Complexity','Very low']] },
-  natural:{ title:'Natural / AI-Assisted', grad:'linear-gradient(135deg,#8b5cf6,#6d28d9)', desc:'Plain English prompts converted to code by AI.', kv:[['Speed','Varies'],['Hardware','None for user'],['Translation','AI → code'],['Complexity','Minimal']] }
+  machine:{ title:'Machine Language', grad:'linear-gradient(135deg,#dc2626,#7f1d1d)', desc:'Pure binary.', kv:[['Speed','Fastest'],['Hardware','Total'],['Translation','None'],['Complexity','Extreme']] },
+  assembly:{ title:'Assembly Language', grad:'linear-gradient(135deg,#f59e0b,#b45309)', desc:'Mnemonics (MOV, ADD).', kv:[['Speed','Very fast'],['Hardware','Very high'],['Translation','Assembler'],['Complexity','High']] },
+  high1:{ title:'High-Level', grad:'linear-gradient(135deg,#10b981,#047857)', desc:'English-like, portable.', kv:[['Speed','Fast'],['Hardware','Low'],['Translation','Compiler'],['Complexity','Moderate']] },
+  high2:{ title:'Very High-Level', grad:'linear-gradient(135deg,#3b82f6,#1d4ed8)', desc:'Abstracted, interpreted.', kv:[['Speed','Slower'],['Hardware','Very low'],['Translation','Interpreter'],['Complexity','Very low']] },
+  natural:{ title:'Natural / AI', grad:'linear-gradient(135deg,#8b5cf6,#6d28d9)', desc:'Plain English prompts.', kv:[['Speed','Varies'],['Hardware','None'],['Translation','AI → code'],['Complexity','Minimal']] }
 };
 const q4SegInfo = document.getElementById('q4-segInfo');
 function q4RenderSeg(k){
@@ -1563,14 +2269,14 @@ document.querySelectorAll('#q4-specBar .spec-seg').forEach(s=>{
 
 const q4CmpRows = [
   ['Type','<span class="tag r">Low-level</span>','<span class="tag o">Low-level</span>','<span class="tag g">High-level</span>'],
-  ['Unit','Binary bit pattern','Mnemonic instruction','Statement / expression'],
+  ['Unit','Binary bit pattern','Mnemonic','Statement'],
   ['<b>Execution Speed</b>','<span class="tag g">Fastest</span>','<span class="tag g">Very fast</span>','<span class="tag o">Slower</span>'],
   ['<b>Hardware Dependence</b>','<span class="tag r">Total</span>','<span class="tag r">Very high</span>','<span class="tag g">Low</span>'],
   ['<b>Translation</b>','<span class="tag g">None</span>','<span class="tag o">Assembler</span>','<span class="tag p">Compiler/Interpreter</span>'],
   ['<b>Complexity</b>','<span class="tag r">Extreme</span>','<span class="tag o">High</span>','<span class="tag g">Low</span>'],
   ['Portability','None','Very low','High'],
   ['Debugging','Nearly impossible','Difficult','Easy'],
-  ['Typical Use','Firmware, bootloaders','Drivers, embedded','Apps, web, AI']
+  ['Typical Use','Firmware','Drivers, embedded','Apps, web, AI']
 ];
 const q4CmpBody = document.getElementById('q4-cmpBody');
 q4CmpRows.forEach(r=>{
@@ -1588,15 +2294,15 @@ const q4ChartGroups = [
 const q4CmpChart = document.getElementById('q4-cmpChart');
 q4ChartGroups.forEach((g, gi)=>{
   const row = document.createElement('div');
-  row.className = 'cmp-row';
-  row.innerHTML = `<div class="cmp-lbl"><span class="n">${gi+1}</span>${g.label}</div><div class="cmp-bars">${g.data.map(d=>`<div class="cmp-bar" style="grid-template-columns:120px 1fr 50px"><span class="who">${d.who}</span><div class="cmp-track"><div class="cmp-fill" data-w="${d.v}" style="background:${d.c}"></div></div><span class="val">${d.v}</span></div>`).join('')}</div>`;
+  row.style.marginBottom = '18px';
+  row.innerHTML = `<div style="font-size:.78rem;font-weight:800;margin-bottom:8px">${gi+1}. ${g.label}</div>${g.data.map(d=>`<div class="bar-row" style="grid-template-columns:120px 1fr 50px"><span class="lbl">${d.who}</span><div class="bar-track"><div class="bar-fill" data-w="${d.v}" style="background:${d.c}"></div></div><span class="val">${d.v}</span></div>`).join('')}`;
   q4CmpChart.appendChild(row);
 });
 
 const q4TransData = {
-  asm:{ title:'🔧 Assembler', grad:'linear-gradient(135deg,#8b5cf6,#6d28d9)', tag:'Assembly → Machine Code', steps:[['1. Read source','Takes .asm file line by line'],['2. Symbol resolution','Maps labels to addresses'],['3. Opcode translation','Mnemonics to binary opcodes'],['4. Operand translation','Registers and numbers to binary'],['5. Output','Object file ready to link']] },
-  comp:{ title:'⚙️ Compiler', grad:'linear-gradient(135deg,#2563eb,#1d4ed8)', tag:'Whole Program → Machine Code', steps:[['1. Lexical','Break into tokens'],['2. Syntax','Build parse tree'],['3. Semantic','Check types and scope'],['4. Optimisation','Rewrite for speed/size'],['5. Code gen','Emit machine code'],['6. Output','Executable (.exe)']] },
-  interp:{ title:'▶️ Interpreter', grad:'linear-gradient(135deg,#10b981,#047857)', tag:'Line by Line at Runtime', steps:[['1. Read a line','Fetch next statement'],['2. Parse','Check syntax of that line'],['3. Execute','Translate and run immediately'],['4. Repeat','Next line'],['5. Error handling','Stop at error for debugging']] }
+  asm:{ title:'🔧 Assembler', grad:'linear-gradient(135deg,#8b5cf6,#6d28d9)', tag:'Assembly → Machine Code', steps:[['1. Read source','Takes .asm file'],['2. Symbol resolution','Labels to addresses'],['3. Opcode translation','Mnemonics to binary'],['4. Operand translation','Registers to binary'],['5. Output','Object file']] },
+  comp:{ title:'⚙️ Compiler', grad:'linear-gradient(135deg,#2563eb,#1d4ed8)', tag:'Whole Program at Once', steps:[['1. Lexical','Break into tokens'],['2. Syntax','Build parse tree'],['3. Semantic','Check types'],['4. Optimisation','Rewrite'],['5. Code gen','Emit machine code'],['6. Output','Executable']] },
+  interp:{ title:'▶️ Interpreter', grad:'linear-gradient(135deg,#10b981,#047857)', tag:'Line by Line', steps:[['1. Read a line','Fetch statement'],['2. Parse','Check syntax'],['3. Execute','Run immediately'],['4. Repeat','Next line'],['5. Error handling','Stop at error']] }
 };
 const q4TransDetail = document.getElementById('q4-transDetail');
 function q4RenderTrans(k){
@@ -1614,7 +2320,7 @@ document.querySelectorAll('#q4-transPick button').forEach(b=>{
 
 const q4CodeViews = {
   machine: { grad:'linear-gradient(135deg,#dc2626,#7f1d1d)', lines:['1011 0000  0000 0011   ; MOV AL, 3','0000 0100  0000 0101   ; ADD AL, 5','1111 0100               ; HLT'] },
-  assembly: { grad:'linear-gradient(135deg,#f59e0b,#b45309)', lines:['MOV  AL, 3       ; load 3 into AL','ADD  AL, 5       ; add 5 → AL = 8','HLT              ; halt processor'] },
+  assembly: { grad:'linear-gradient(135deg,#f59e0b,#b45309)', lines:['MOV  AL, 3       ; load 3 into AL','ADD  AL, 5       ; add 5 → AL = 8','HLT              ; halt'] },
   high: { grad:'linear-gradient(135deg,#10b981,#047857)', lines:['a = 3','b = 5','result = a + b','print(result)   # outputs 8'] }
 };
 const q4CodeStage = document.getElementById('q4-codeStage');
@@ -1634,11 +2340,11 @@ document.querySelectorAll('#q4-viewPick button').forEach(b=>{
 
 buildQuiz('q4', [
   { q:'Which language category offers the FASTEST execution speed?', opts:['High-level','Assembly','Machine','Very high-level'], a:2, exp:'Machine language is executed directly by the CPU.' },
-  { q:'Which translator is used for ASSEMBLY language?', opts:['Compiler','Interpreter','Assembler','Linker'], a:2, exp:'An assembler converts mnemonics to binary machine code.' },
-  { q:'Which is TRUE about HIGH-LEVEL languages?', opts:['Machine-dependent','No translation required','Portable, easier to write','Faster than machine'], a:2, exp:'High-level code is hardware-independent and portable.' },
+  { q:'Which translator is used for ASSEMBLY language?', opts:['Compiler','Interpreter','Assembler','Linker'], a:2, exp:'An assembler converts mnemonics to binary.' },
+  { q:'Which is TRUE about HIGH-LEVEL languages?', opts:['Machine-dependent','No translation required','Portable, easier to write','Faster than machine'], a:2, exp:'High-level code is portable and easier to write.' },
   { q:'Which is NOT a characteristic of low-level languages?', opts:['Direct hardware control','Machine dependence','High portability','Very fast execution'], a:2, exp:'Low-level code is the OPPOSITE of portable.' },
-  { q:'A COMPILER differs from an INTERPRETER because it:', opts:['Translates the whole program at once','Translates line by line','Only works with assembly','Produces slower programs'], a:0, exp:'A compiler translates the whole program BEFORE running.' },
-  { q:'Why are high-level languages EASIER to program in?', opts:['They run without translation','Use English-like keywords and hide hardware details','Require no debugging','Always faster'], a:1, exp:'Readable syntax and abstraction make them easier.' }
+  { q:'A COMPILER differs from an INTERPRETER because it:', opts:['Translates the whole program at once','Translates line by line','Only works with assembly','Produces slower programs'], a:0, exp:'Compiler translates whole program BEFORE running.' },
+  { q:'Why are high-level languages EASIER to program in?', opts:['They run without translation','Use English-like keywords and hide hardware details','Require no debugging','Always faster'], a:1, exp:'Readable syntax and abstraction.' }
 ]);
 
 /* =========================================================
@@ -1801,12 +2507,12 @@ q5CmpRows.forEach(r=>{
 });
 
 buildQuiz('q5', [
-  { q:'A mouse reports cursor movement as a DELTA. This is called:', opts:['Absolute tracking','Relative tracking','Vector tracking','Polar tracking'], a:1, exp:'Relative tracking = reports how far it moved, not where it is.' },
-  { q:'Which technology does a modern graphics tablet use to detect the stylus?', opts:['Capacitive','Optical','Electromagnetic Resonance (EMR)','Ultrasonic'], a:2, exp:'EMR uses a grid that energises the pen\'s resonant circuit — no battery needed.' },
-  { q:'How many pressure levels can a professional tablet report?', opts:['1','8','256','1,024–8,192'], a:3, exp:'Professional tablets report thousands of discrete pressure levels.' },
-  { q:'Why is a tablet preferred over a mouse for professional DIGITAL ART?', opts:['Cheaper','Pressure + absolute mapping for natural brush control','Works without drivers','Only for CAD'], a:1, exp:'Pressure lets the artist vary brush width.' },
-  { q:'In CAD, the main advantage of a large digitizer over a mouse is:', opts:['Scroll wheel','Points map to known coordinates for tracing','More portable','No electricity needed'], a:1, exp:'Absolute coordinates make tracing blueprints accurate.' },
-  { q:'Which statement about TRACKBALLS is TRUE?', opts:['Absolute tracking','1,024 pressure levels','Relative tracking with almost no desk space','Standard for painting'], a:2, exp:'Trackball is relative but the ball is fixed — no desk travel needed.' }
+  { q:'A mouse reports cursor movement as a DELTA. This is called:', opts:['Absolute tracking','Relative tracking','Vector tracking','Polar tracking'], a:1, exp:'Relative tracking reports how far it moved.' },
+  { q:'Which technology does a modern graphics tablet use to detect the stylus?', opts:['Capacitive','Optical','Electromagnetic Resonance (EMR)','Ultrasonic'], a:2, exp:'EMR uses a grid that energises the pen.' },
+  { q:'How many pressure levels can a professional tablet report?', opts:['1','8','256','1,024–8,192'], a:3, exp:'Thousands of discrete pressure levels.' },
+  { q:'Why is a tablet preferred over a mouse for professional DIGITAL ART?', opts:['Cheaper','Pressure + absolute mapping for natural brush control','Works without drivers','Only for CAD'], a:1, exp:'Pressure lets artist vary brush width.' },
+  { q:'In CAD, the main advantage of a large digitizer over a mouse is:', opts:['Scroll wheel','Points map to known coordinates for tracing','More portable','No electricity needed'], a:1, exp:'Absolute coordinates make tracing accurate.' },
+  { q:'Which statement about TRACKBALLS is TRUE?', opts:['Absolute tracking','1,024 pressure levels','Relative tracking with almost no desk space','Standard for painting'], a:2, exp:'Ball is fixed — no desk travel needed.' }
 ]);
 
 /* =========================================================
@@ -1845,15 +2551,8 @@ function q6Render(){
   document.getElementById('q6-totalM').textContent = q6Short(mTotal);
   document.getElementById('q6-subP').textContent = `${years}-yr TCO · ${Math.round(prints*years*12).toLocaleString('en-IN')} sheets`;
   document.getElementById('q6-subM').textContent = `${years}-yr TCO · ${Math.round(prints*(1-reduce)*years*12).toLocaleString('en-IN')} sheets`;
-  document.getElementById('q6-breakP').innerHTML = `
-    <li style="display:flex;justify-content:space-between"><span>Capital</span><b>${q6Inr(pCapital)}</b></li>
-    <li style="display:flex;justify-content:space-between"><span>Consumables</span><b>${q6Inr(pConsum)}</b></li>
-    <li style="display:flex;justify-content:space-between"><span>Maintenance</span><b>${q6Inr(pMaint)}</b></li>`;
-  document.getElementById('q6-breakM').innerHTML = `
-    <li style="display:flex;justify-content:space-between"><span>Monitor capital</span><b>${q6Inr(mMonCap)}</b></li>
-    <li style="display:flex;justify-content:space-between"><span>Printer capital</span><b>${q6Inr(mPrnCap)}</b></li>
-    <li style="display:flex;justify-content:space-between"><span>Consumables</span><b>${q6Inr(mConsum)}</b></li>
-    <li style="display:flex;justify-content:space-between"><span>Maintenance</span><b>${q6Inr(mMaint)}</b></li>`;
+  document.getElementById('q6-breakP').innerHTML = `<li style="display:flex;justify-content:space-between"><span>Capital</span><b>${q6Inr(pCapital)}</b></li><li style="display:flex;justify-content:space-between"><span>Consumables</span><b>${q6Inr(pConsum)}</b></li><li style="display:flex;justify-content:space-between"><span>Maintenance</span><b>${q6Inr(pMaint)}</b></li>`;
+  document.getElementById('q6-breakM').innerHTML = `<li style="display:flex;justify-content:space-between"><span>Monitor capital</span><b>${q6Inr(mMonCap)}</b></li><li style="display:flex;justify-content:space-between"><span>Printer capital</span><b>${q6Inr(mPrnCap)}</b></li><li style="display:flex;justify-content:space-between"><span>Consumables</span><b>${q6Inr(mConsum)}</b></li><li style="display:flex;justify-content:space-between"><span>Maintenance</span><b>${q6Inr(mMaint)}</b></li>`;
   const win = pTotal < mTotal;
   const diff = Math.abs(pTotal - mTotal);
   const pct = (diff / Math.max(pTotal, mTotal) * 100).toFixed(0);
@@ -1912,7 +2611,7 @@ document.getElementById('q7-sLux').addEventListener('input', function(){
   document.getElementById('q7-aNIR').textContent = q7Face(l).toFixed(0) + '%';
   const v = document.getElementById('q7-luxVerdict');
   if(l >= 4.5){ v.className = 'note red'; v.innerHTML = '<b>IR saturation:</b> direct sunlight floods the NIR band. Liveness detection is blinded.'; }
-  else if(l < 1){ v.className = 'note blue'; v.innerHTML = '<b>Darkness:</b> RGB fails but NIR + 3D still works — the clearest argument for hardened face hardware.'; }
+  else if(l < 1){ v.className = 'note blue'; v.innerHTML = '<b>Darkness:</b> RGB fails but NIR + 3D still works.'; }
   else { v.className = 'note green'; v.innerHTML = '<b>Reliable:</b> both systems perform well at this illumination.'; }
 });
 document.getElementById('q7-sNoise').dispatchEvent(new Event('input'));
@@ -1921,10 +2620,10 @@ document.getElementById('q7-sLux').dispatchEvent(new Event('input'));
 const q7Attacks = [
   { key:'photo', em:'🖼️', name:'Printed Photo', icon:'🖼️', grad:'linear-gradient(135deg,#f59e0b,#b45309)', face:'block', faceNote:'Rejected by depth sensing. A flat sheet has no 3D geometry.', voice:'n/a', voiceNote:'Not applicable.', method:'3D depth geometry check', critique:'The attack that separates basic webcam from hardened depth-sensing systems.' },
   { key:'screen', em:'📱', name:'Screen Replay', icon:'📱', grad:'linear-gradient(135deg,#f97316,#c2410c)', face:'block', faceNote:'Rejected by depth + moiré + screen-refresh detection.', voice:'n/a', voiceNote:'Not applicable.', method:'Depth + moiré detection', critique:'Well-defended, but the attack requires only a phone.' },
-  { key:'mask3d', em:'🎭', name:'3D Silicone Mask', icon:'🎭', grad:'linear-gradient(135deg,#ef4444,#b91c1c)', face:'part', faceNote:'Partially defeated. Reproduces depth geometry; detection depends on texture.', voice:'n/a', voiceNote:'Not applicable.', method:'Texture + subsurface scattering', critique:'Most serious residual face vulnerability.' },
-  { key:'inject', em:'💉', name:'Virtual Camera Injection', icon:'💉', grad:'linear-gradient(135deg,#dc2626,#7f1d1d)', face:'succ', faceNote:'Succeeds against most deployments — synthetic video fed to SDK.', voice:'succ', voiceNote:'Audio equivalent defeats voice the same way.', method:'Secure boot + attestation', critique:'Most under-defended attack. Defence is architectural.' },
+  { key:'mask3d', em:'🎭', name:'3D Silicone Mask', icon:'🎭', grad:'linear-gradient(135deg,#ef4444,#b91c1c)', face:'part', faceNote:'Partially defeated. Reproduces depth geometry.', voice:'n/a', voiceNote:'Not applicable.', method:'Texture + subsurface scattering', critique:'Most serious residual face vulnerability.' },
+  { key:'inject', em:'💉', name:'Virtual Camera Injection', icon:'💉', grad:'linear-gradient(135deg,#dc2626,#7f1d1d)', face:'succ', faceNote:'Succeeds against most deployments — synthetic video fed to SDK.', voice:'succ', voiceNote:'Audio equivalent defeats voice the same way.', method:'Secure boot + attestation', critique:'Most under-defended attack.' },
   { key:'replay', em:'🔊', name:'Audio Replay', icon:'🔊', grad:'linear-gradient(135deg,#db2777,#9d174d)', face:'n/a', faceNote:'Not applicable.', voice:'succ', voiceNote:'Succeeds against many deployments. A 5-second recording can defeat most systems.', method:'Challenge-response + pop-noise', critique:'Defining weakness of voice — attacker need not be present.' },
-  { key:'tts', em:'🤖', name:'Neural TTS', icon:'🤖', grad:'linear-gradient(135deg,#7c3aed,#5b21b6)', face:'n/a', faceNote:'Not applicable.', voice:'succ', voiceNote:'Succeeds against text-dependent systems. Modern neural TTS is near-indistinguishable.', method:'Spectral artefact detection', critique:'Rapidly worsening threat — the defender is structurally behind.' }
+  { key:'tts', em:'🤖', name:'Neural TTS', icon:'🤖', grad:'linear-gradient(135deg,#7c3aed,#5b21b6)', face:'n/a', faceNote:'Not applicable.', voice:'succ', voiceNote:'Succeeds against text-dependent systems.', method:'Spectral artefact detection', critique:'Rapidly worsening threat.' }
 ];
 const q7AtkPick = document.getElementById('q7-atkPick');
 const q7AtkResult = document.getElementById('q7-atkResult');
@@ -1979,9 +2678,9 @@ q7HeatTable.innerHTML = q7HT;
 buildQuiz('q7', [
   { q:'Why does voice recognition degrade in high ambient noise?', opts:['Microphones stop working','Noise is additive and masks spectral detail','Loud noise changes the speaker permanently','Requires complete silence'], a:1, exp:'At 80 dB, SNR in the speech band approaches 0 dB.' },
   { q:'Biggest environmental failure of hardened face recognition outdoors?', opts:['Rain on lens','Direct sunlight saturating NIR liveness','Ambient noise','Colour temperature'], a:1, exp:'Direct sunlight saturates the 850/940 nm band.' },
-  { q:'Which attack is more dangerous for VOICE biometrics?', opts:['3D mask','Replay — deliverable remotely without physical presence','Adversarial patch','Coerced speech'], a:1, exp:'Voice replay requires only a recording.' },
-  { q:'A virtual camera injection defeats face recognition. Why can no on-sensor liveness check prevent it?', opts:['Sensor faulty','Attacker feeds synthetic stream directly to the SDK, bypassing the sensor','Liveness only works in daylight','Driver is encrypted'], a:1, exp:'The sensor never sees the attacker.' },
-  { q:'Best description of the PRIVACY trade-off?', opts:['Voice more invasive','Face more invasive — covert capture at distance, permanent template','Identical','Neither has privacy implications'], a:1, exp:'Face data can be captured covertly from a distance.' },
+  { q:'Which attack is more dangerous for VOICE biometrics?', opts:['3D mask','Replay — deliverable remotely','Adversarial patch','Coerced speech'], a:1, exp:'Voice replay requires only a recording.' },
+  { q:'A virtual camera injection defeats face recognition. Why can no on-sensor liveness check prevent it?', opts:['Sensor faulty','Attacker feeds synthetic stream directly to the SDK','Liveness only works in daylight','Driver is encrypted'], a:1, exp:'The sensor never sees the attacker.' },
+  { q:'Best description of the PRIVACY trade-off?', opts:['Voice more invasive','Face more invasive — covert capture at distance','Identical','Neither has privacy implications'], a:1, exp:'Face data can be captured covertly from a distance.' },
   { q:'Defensible architecture for high-noise, publicly exposed authentication?', opts:['Voice alone','Face alone','Layered: face + possession/knowledge factor + on-device liveness + secure element','No biometrics'], a:2, exp:'Neither biometric is safe standalone.' }
 ]);
 
@@ -1989,16 +2688,16 @@ buildQuiz('q7', [
    Q8 — ACCESSIBLE WORKSTATION
    ========================================================= */
 const q8Input = [
-  { title:'Voice Recognition System', sub:'Primary input · Hands-free', grad:'linear-gradient(135deg,#2563eb,#1d4ed8)', icon:'🎙️', intro:'Primary input. Far-field mic array + command/dictation engine.', specs:[['Role','Primary'],['Hardware','4–8 mic MEMS array'],['Mode 1','Command'],['Mode 2','Dictation'],['Latency','<300 ms'],['Accuracy','>95% quiet']], pros:['Zero visual demand','Zero manual demand','Fastest route to any function','Handles complex commands'], cons:['Ambiguous for spelling/code','Degrades in noise','Misrecognition risk','Privacy concern'] },
-  { title:'Tactile / Braille Keyboard', sub:'Secondary · Precision', grad:'linear-gradient(135deg,#7c3aed,#5b21b6)', icon:'⠿', intro:'Perkins-style 8-key chorded Braille keyboard. Silent precision.', specs:[['Role','Secondary'],['Keys','8-key chorded'],['Speed','40–80 wpm'],['Feedback','Braille display'],['Noise','Silent'],['Power','USB']], pros:['Unambiguous for spelling','Silent','Tactile home position','Works when mic fails'], cons:['Requires Braille literacy','Not strictly hands-free','Learning curve','Poor for long prose'] },
-  { title:'Switch Access / Sip-and-Puff', sub:'Fallback · Scanning', grad:'linear-gradient(135deg,#0891b2,#0e7490)', icon:'🎛️', intro:'Single or dual switch driving a scanning interface. Genuine fallback.', specs:[['Role','Fallback'],['Types','Head, foot, sip-puff'],['Model','Row-column scanning'],['Scan Rate','0.5–5 s'],['Switch Count','1 or 2'],['Feedback','Speech announces']], pros:['Works when voice+Braille fail','No fine motor control','Robust','Configurable'], cons:['Very slow','Exhausting','Needs mounting','Not primary'] },
-  { title:'Gesture / Head Sensor', sub:'Supplementary · Contact-free', grad:'linear-gradient(135deg,#059669,#047857)', icon:'🖐️', intro:'Optional contact-free sensor recognising small gestures mapped to frequent actions.', specs:[['Role','Supplementary'],['Sensing','IR depth or ultrasonic'],['Vocabulary','5–12 gestures'],['Mapping','Nod=confirm'],['Latency','<200 ms'],['Privacy','On-device']], pros:['Contact-free','Reduces voice fatigue','Faster than speech for acks','Silent'], cons:['Small vocabulary','False triggers','Needs calibration','Light-sensitive'] }
+  { title:'Voice Recognition System', sub:'Primary input · Hands-free', grad:'linear-gradient(135deg,#2563eb,#1d4ed8)', icon:'🎙️', intro:'Primary input. Far-field mic array + command/dictation engine.', specs:[['Role','Primary'],['Hardware','4–8 mic MEMS array'],['Latency','<300 ms'],['Accuracy','>95% quiet']], pros:['Zero visual demand','Zero manual demand','Fastest route to any function'], cons:['Ambiguous for spelling/code','Degrades in noise','Privacy concern'] },
+  { title:'Tactile / Braille Keyboard', sub:'Secondary · Precision', grad:'linear-gradient(135deg,#7c3aed,#5b21b6)', icon:'⠿', intro:'Perkins-style 8-key chorded Braille keyboard.', specs:[['Role','Secondary'],['Keys','8-key chorded'],['Speed','40–80 wpm'],['Noise','Silent']], pros:['Unambiguous for spelling','Silent','Works when mic fails'], cons:['Requires Braille literacy','Not strictly hands-free','Learning curve'] },
+  { title:'Switch / Sip-and-Puff', sub:'Fallback · Scanning', grad:'linear-gradient(135deg,#0891b2,#0e7490)', icon:'🎛️', intro:'Single or dual switch driving a scanning interface.', specs:[['Role','Fallback'],['Types','Head, foot, sip-puff'],['Model','Row-column scanning'],['Scan Rate','0.5–5 s']], pros:['Works when voice+Braille fail','No fine motor control','Robust'], cons:['Very slow','Exhausting','Needs mounting'] },
+  { title:'Gesture / Head Sensor', sub:'Supplementary · Contact-free', grad:'linear-gradient(135deg,#059669,#047857)', icon:'🖐️', intro:'Optional contact-free sensor recognising small gestures.', specs:[['Role','Supplementary'],['Sensing','IR depth or ultrasonic'],['Vocabulary','5–12 gestures'],['Latency','<200 ms']], pros:['Contact-free','Reduces voice fatigue','Silent'], cons:['Small vocabulary','False triggers','Light-sensitive'] }
 ];
 const q8Output = [
-  { title:'Screen Reader', sub:'Central output intelligence', grad:'linear-gradient(135deg,#f59e0b,#b45309)', icon:'🧠', intro:'Queries the OS accessibility API to build a model of the interface. Drives speech, Braille and haptics.', specs:[['Type','Software'],['Examples','NVDA, JAWS, VoiceOver'],['Source','Accessibility tree'],['Modes','Browse, focus, forms'],['Verbosity','User-adjustable'],['Key Echo','Off/char/word']], pros:['Works with any compliant app','Structured navigation','Configurable verbosity','Drives multiple channels'], cons:['Dependent on app accessibility','Serialises parallel info','Poor apps = poor output','Requires setup'] },
-  { title:'Speech Synthesizer', sub:'Primary output · Adjustable rate', grad:'linear-gradient(135deg,#db2777,#9d174d)', icon:'🔊', intro:'Converts text to speech. Expert users run at 300–500 wpm.', specs:[['Type','Software or hardware'],['Engines','eSpeak, Eloquence, Acapela'],['Rate','300–500 wpm typical'],['Range','50–1000 wpm'],['Output','Headphones, speakers'],['Latency','<100 ms']], pros:['Fastest way to absorb text','Works with any content','No extra hardware','Multi-language'], cons:['Not private','Poor for spelling/code','Fatiguing','Useless for deafblind'] },
-  { title:'Refreshable Braille Display', sub:'Silent · 40–80 cells', grad:'linear-gradient(135deg,#8b5cf6,#6d28d9)', icon:'⠿', intro:'Row of electromechanical cells with retractable pins. Silent, precise, self-paced.', specs:[['Type','Electromechanical'],['Cells','40–80 single line'],['Dots/cell','6 or 8'],['Refresh','<50 ms per line'],['Connectivity','USB + Bluetooth'],['Control','Panning, routing keys']], pros:['Silent — private','Precise for spelling/code','Self-paced','Spatial structure for tables'], cons:['Expensive','Fragile pins','Single line only','Requires Braille literacy'] },
-  { title:'Haptic & Earcons', sub:'Confirmation · State cues', grad:'linear-gradient(135deg,#0ea5e9,#0369a1)', icon:'📳', intro:'Non-speech output confirming actions, signalling state and warning of errors.', specs:[['Haptic','Vibration motor'],['Earcon','Short tones'],['Patterns','Confirm, error, boundary'],['Latency','<50 ms'],['Integration','Screen reader events'],['Purpose','Reduce speech overload']], pros:['Reduces speech load','Instant confirmation','Silent','Essential for deafblind'], cons:['Limited bandwidth','Requires learning','Not perceivable by all','Can be intrusive'] }
+  { title:'Screen Reader', sub:'Central output intelligence', grad:'linear-gradient(135deg,#f59e0b,#b45309)', icon:'🧠', intro:'Queries the OS accessibility API to build a model of the interface.', specs:[['Type','Software'],['Examples','NVDA, JAWS, VoiceOver'],['Source','Accessibility tree'],['Verbosity','User-adjustable']], pros:['Works with any compliant app','Structured navigation','Drives multiple channels'], cons:['Dependent on app accessibility','Serialises parallel info','Requires setup'] },
+  { title:'Speech Synthesizer', sub:'Primary output · Adjustable rate', grad:'linear-gradient(135deg,#db2777,#9d174d)', icon:'🔊', intro:'Converts text to speech at 300–500 wpm.', specs:[['Type','Software or hardware'],['Engines','eSpeak, Eloquence'],['Rate','300–500 wpm'],['Latency','<100 ms']], pros:['Fastest way to absorb text','Works with any content','Multi-language'], cons:['Not private','Poor for spelling/code','Fatiguing'] },
+  { title:'Refreshable Braille Display', sub:'Silent · 40–80 cells', grad:'linear-gradient(135deg,#8b5cf6,#6d28d9)', icon:'⠿', intro:'Row of electromechanical cells with retractable pins.', specs:[['Type','Electromechanical'],['Cells','40–80'],['Dots/cell','6 or 8'],['Refresh','<50 ms']], pros:['Silent — private','Precise for spelling/code','Self-paced'], cons:['Expensive','Fragile pins','Requires Braille literacy'] },
+  { title:'Haptic & Earcons', sub:'Confirmation · State cues', grad:'linear-gradient(135deg,#0ea5e9,#0369a1)', icon:'📳', intro:'Non-speech output confirming actions.', specs:[['Haptic','Vibration motor'],['Earcon','Short tones'],['Patterns','Confirm, error'],['Latency','<50 ms']], pros:['Reduces speech load','Instant confirmation','Silent'], cons:['Limited bandwidth','Requires learning','Can be intrusive'] }
 ];
 function renderQ8Cards(list, cid){
   const c = document.getElementById(cid);
@@ -2014,18 +2713,18 @@ renderQ8Cards(q8Input, 'q8-inputGrid');
 renderQ8Cards(q8Output, 'q8-outputGrid');
 
 const q8BlkInfo = {
-  user:{ tag:'End User', title:'Visually Impaired User', grad:'linear-gradient(135deg,#0f172a,#334155)', role:'Operates entirely through non-visual channels. No screen, no pointer, no key position search.', parts:[['Voice-Led','Speaks commands — primary mode'],['Braille-Led','Tactile keyboard + Braille for precision'],['Switch-Led','Scanning with a single switch as fallback']] },
-  mic:{ tag:'Input', title:'Far-Field Microphone Array', grad:'linear-gradient(135deg,#2563eb,#1d4ed8)', role:'Captures voice without requiring the user to lean toward a single mic. Steers beam toward speaker.', parts:[['Elements','4–8 MEMS mics'],['Beamforming','Steers virtual beam'],['Noise Suppression','Spectral subtraction'],['Echo Cancellation','Removes TTS output']] },
-  asr:{ tag:'Input', title:'Voice Recognition Engine', grad:'linear-gradient(135deg,#7c3aed,#5b21b6)', role:'Converts acoustic signal into command tokens or dictated text. Two modes: command and dictation.', parts:[['Command Mode','Constrained grammar'],['Dictation Mode','Large vocabulary'],['Spell Mode','Passes to tactile keyboard'],['Correction','"Scratch that"']] },
-  brailleIn:{ tag:'Input', title:'Tactile / Braille Keyboard', grad:'linear-gradient(135deg,#0891b2,#0e7490)', role:'Chorded 8-key Braille keyboard for precision text entry — spelling, punctuation, code.', parts:[['Layout','8 keys + space'],['Entry','Chorded'],['Speed','40–80 wpm'],['Feedback','Braille display']] },
-  switch:{ tag:'Input', title:'Switch / Sensor Access', grad:'linear-gradient(135deg,#059669,#047857)', role:'Single or dual switch driving a scanning interface. Last-resort input when voice and hands unavailable.', parts:[['Head Switch','Small head movement'],['Sip-and-Puff','Pressure or vacuum'],['Foot Switch','Floor-mounted pedal'],['Proximity','Detects hand/finger']] },
-  screenreader:{ tag:'Processing', title:'Screen Reader', grad:'linear-gradient(135deg,#f59e0b,#b45309)', role:'Central output intelligence. Queries the OS accessibility API to build a UI model, decides what to announce.', parts:[['UI Modelling','Builds tree of controls'],['Announcement Logic','Decides what/order/verbosity'],['Navigation','Heading, list, link, table'],['Multi-Channel','Routes to speech, Braille, haptics']] },
-  os:{ tag:'Processing', title:'OS Accessibility API', grad:'linear-gradient(135deg,#dc2626,#991b1b)', role:'The hinge of the architecture. Standard interface through which apps expose structure to assistive tech.', parts:[['Windows','UI Automation (UIA)'],['Linux','AT-SPI'],['macOS','AXAPI / UIAccessibility'],['Web','ARIA']] },
-  apps:{ tag:'Processing', title:'Applications & OCR', grad:'linear-gradient(135deg,#f59e0b,#b45309)', role:'Productivity software — word processor, email, browser, files. OCR extends accessibility to scanned documents.', parts:[['Full Keyboard','Every function no pointer'],['Accessible Names','Controls expose names'],['Logical Focus','Tab follows reading order'],['OCR Engine','Scans → readable text']] },
-  speech:{ tag:'Output', title:'Speech Synthesizer', grad:'linear-gradient(135deg,#db2777,#9d174d)', role:'Converts text into speech. Primary output channel but not private and not suitable for spelling.', parts:[['Rate','300–500 wpm typical'],['Range','50–1000 wpm'],['Engines','eSpeak, Eloquence, Neural'],['Output','Headphones, bone conduction']] },
-  brailleOut:{ tag:'Output', title:'Refreshable Braille Display', grad:'linear-gradient(135deg,#8b5cf6,#6d28d9)', role:'Row of 40–80 electromechanical cells. Silent, precise, self-paced access to text and code.', parts:[['Cells','40–80 single line'],['Dots','6 or 8'],['Refresh','<50 ms'],['Control','Panning, routing keys']] },
-  haptic:{ tag:'Output', title:'Haptic Feedback', grad:'linear-gradient(135deg,#0ea5e9,#0369a1)', role:'Non-speech vibration confirming actions, signalling state, warning of errors.', parts:[['Confirm','One short pulse'],['Error','Two sharp pulses'],['Boundary','Soft double pulse'],['Progress','Slow rhythmic pulse']] },
-  audio:{ tag:'Output', title:'Audio Output & Earcons', grad:'linear-gradient(135deg,#10b981,#065f46)', role:'Physical audio path — headphones for privacy, or bone conduction to keep ears open.', parts:[['Headphones','Over-ear isolation'],['Bone Conduction','Open ear canal'],['Earcons','Short state-transition tones'],['Mixing','Speech + earcons share']] }
+  user:{ tag:'End User', title:'Visually Impaired User', grad:'linear-gradient(135deg,#0f172a,#334155)', role:'Operates entirely through non-visual channels.' },
+  mic:{ tag:'Input', title:'Far-Field Microphone Array', grad:'linear-gradient(135deg,#2563eb,#1d4ed8)', role:'Captures voice without requiring the user to lean toward a single mic.' },
+  asr:{ tag:'Input', title:'Voice Recognition Engine', grad:'linear-gradient(135deg,#7c3aed,#5b21b6)', role:'Converts acoustic signal into command tokens or dictated text.' },
+  brailleIn:{ tag:'Input', title:'Tactile / Braille Keyboard', grad:'linear-gradient(135deg,#0891b2,#0e7490)', role:'Chorded 8-key Braille keyboard for precision text entry.' },
+  switch:{ tag:'Input', title:'Switch / Sensor Access', grad:'linear-gradient(135deg,#059669,#047857)', role:'Single or dual switch driving a scanning interface.' },
+  screenreader:{ tag:'Processing', title:'Screen Reader', grad:'linear-gradient(135deg,#f59e0b,#b45309)', role:'Central output intelligence. Queries the OS accessibility API.' },
+  os:{ tag:'Processing', title:'OS Accessibility API', grad:'linear-gradient(135deg,#dc2626,#991b1b)', role:'Standard interface through which apps expose structure to assistive tech.' },
+  apps:{ tag:'Processing', title:'Applications & OCR', grad:'linear-gradient(135deg,#f59e0b,#b45309)', role:'Productivity software. OCR extends accessibility to scanned documents.' },
+  speech:{ tag:'Output', title:'Speech Synthesizer', grad:'linear-gradient(135deg,#db2777,#9d174d)', role:'Converts text into speech at 300–500 wpm.' },
+  brailleOut:{ tag:'Output', title:'Refreshable Braille Display', grad:'linear-gradient(135deg,#8b5cf6,#6d28d9)', role:'Row of 40–80 electromechanical cells. Silent, precise, self-paced.' },
+  haptic:{ tag:'Output', title:'Haptic Feedback', grad:'linear-gradient(135deg,#0ea5e9,#0369a1)', role:'Non-speech vibration confirming actions and warning of errors.' },
+  audio:{ tag:'Output', title:'Audio Output & Earcons', grad:'linear-gradient(135deg,#10b981,#065f46)', role:'Physical audio path — headphones or bone conduction.' }
 };
 document.querySelectorAll('#q8-svg .blk').forEach(b=>{
   b.addEventListener('click', ()=>{
@@ -2033,7 +2732,7 @@ document.querySelectorAll('#q8-svg .blk').forEach(b=>{
     if(!info) return;
     document.querySelectorAll('#q8-svg .blk').forEach(x=>x.classList.remove('active'));
     b.classList.add('active');
-    document.getElementById('q8-side').innerHTML = `<div class="ah" style="background:${info.grad}"><span class="tag">${info.tag}</span><h3>${info.title}</h3></div><div class="ab"><p>${info.role}</p><h4>Parts</h4><ul class="kv-list">${info.parts.map(p=>`<li style="flex-direction:column;gap:3px"><b style="flex:none;font-size:.76rem">${p[0]}</b><span>${p[1]}</span></li>`).join('')}</ul></div>`;
+    document.getElementById('q8-side').innerHTML = `<div class="ah" style="background:${info.grad}"><span class="tag">${info.tag}</span><h3>${info.title}</h3></div><div class="ab"><p>${info.role}</p></div>`;
   });
 });
 
@@ -2097,7 +2796,7 @@ const q8Tasks = {
     { t:'Open the mail application', ic:'🗣️', g:'linear-gradient(135deg,#7c3aed,#5b21b6)', d:'"Open email" → OPEN_MAIL. Screen reader locates mail via accessibility API.', kv:[['Input','Voice command'],['Output','Speech'],['Perception','"Mail. 3 unread."'],['Fail','Low confidence = repeat']], log:'ASR: OPEN_MAIL (0.97)' },
     { t:'Compose a new message', ic:'✍️', g:'linear-gradient(135deg,#f59e0b,#b45309)', d:'Editor opens; screen reader announces To field; voice engine switches to dictation mode.', kv:[['Input','Voice dictation'],['Output','Speech + Braille'],['Perception','"To field, edit."'],['Fail','Switch to spell mode']], log:'ASR: DICTATION mode.' },
     { t:'Dictate the body', ic:'⠿', g:'linear-gradient(135deg,#8b5cf6,#6d28d9)', d:'Braille display shows each phrase for verification. Precise words typed on Braille keyboard.', kv:[['Input','Voice + Braille keys'],['Output','Braille + haptic'],['Perception','Tactile text'],['Fail','"Scratch that"']], log:'BR: Body accepted.' },
-    { t:'Confirm and send', ic:'📤', g:'linear-gradient(135deg,#db2777,#9d174d)', d:'Sending is irreversible — system speaks a confirmation prompt and waits for explicit "yes".', kv:[['Input','Voice confirm'],['Output','Speech prompt'],['Perception','"Send to Dr. Mehta? Say yes."'],['Fail','No confirmation = no send']], log:'SR: Confirmation issued.' },
+    { t:'Confirm and send', ic:'📤', g:'linear-gradient(135deg,#db2777,#9d174d)', d:'Sending is irreversible — system speaks confirmation prompt and waits for explicit "yes".', kv:[['Input','Voice confirm'],['Output','Speech prompt'],['Perception','"Send to Dr. Mehta? Say yes."'],['Fail','No confirmation = no send']], log:'SR: Confirmation issued.' },
     { t:'Verify completion', ic:'📳', g:'linear-gradient(135deg,#0ea5e9,#0369a1)', d:'Two haptic pulses confirm success. Screen reader announces new inbox state.', kv:[['Input','Voice (yes)'],['Output','Haptic + speech'],['Perception','Two vibrations + "Sent."'],['Fail','Error earcon']], log:'SYS: Message sent.' }
   ]},
   read: { label:'📖 Read scanned document', steps:[
@@ -2107,14 +2806,6 @@ const q8Tasks = {
     { t:'Read with adjustable speed', ic:'🔊', g:'linear-gradient(135deg,#db2777,#9d174d)', d:'User sets speech rate to 420 wpm. Braille shows current line for reference.', kv:[['Input','Voice "rate 420"'],['Output','Speech + Braille'],['Perception','Fast speech + Braille'],['Fail','Reduce rate or Braille-only']], log:'TTS: Rate 420 wpm.' },
     { t:'Extract a technical term', ic:'⠿', g:'linear-gradient(135deg,#0891b2,#0e7490)', d:'"Spell that" reads exact spelling character by character on Braille.', kv:[['Input','Voice "spell"'],['Output','Braille'],['Perception','Precise spelling'],['Fail','None — unambiguous']], log:'BR: Spell mode.' },
     { t:'Save position and exit', ic:'💾', g:'linear-gradient(135deg,#10b981,#065f46)', d:'"Mark my place and close" — position bookmarked, save confirmed before closing.', kv:[['Input','Voice'],['Output','Speech + haptic'],['Perception','"Bookmark set."'],['Fail','Error earcon']], log:'SYS: Bookmark saved.' }
-  ]},
-  file: { label:'📁 Organise files', steps:[
-    { t:'Search by voice', ic:'🎙️', g:'linear-gradient(135deg,#2563eb,#1d4ed8)', d:'"Find all files modified last week containing invoice" — parsed as structured query.', kv:[['Input','Natural voice query'],['Output','Speech'],['Perception','"Searching..."'],['Fail','Too vague = clarify']], log:'ASR: Query parsed.' },
-    { t:'Review results as a list', ic:'📋', g:'linear-gradient(135deg,#f59e0b,#b45309)', d:'Results announced as navigable list, not read out in full.', kv:[['Input','Voice navigate'],['Output','Speech list'],['Perception','"6 results. Item 1."'],['Fail','Filter by date/type']], log:'SR: 6 results.' },
-    { t:'Rename with precision', ic:'⠿', g:'linear-gradient(135deg,#8b5cf6,#6d28d9)', d:'Filenames are unforgiving — done on tactile Braille keyboard.', kv:[['Input','Braille keys'],['Output','Braille + key echo'],['Perception','Char-by-char'],['Fail','None — exact']], log:'BR: Filename entered.' },
-    { t:'Move to a folder', ic:'📦', g:'linear-gradient(135deg,#0891b2,#0e7490)', d:'"Move to Archive" — screen reader confirms destination before executing.', kv:[['Input','Voice'],['Output','Speech prompt'],['Perception','"Move to Archive? Yes."'],['Fail','No confirmation = no move']], log:'SR: Move confirmed.' },
-    { t:'Undo if wrong', ic:'↩️', g:'linear-gradient(135deg,#dc2626,#991b1b)', d:'Single spoken "Undo" reverses the action from anywhere.', kv:[['Input','Global undo'],['Output','Speech'],['Perception','"Undone: move reversed."'],['Fail','Undo stack persists per session']], log:'SYS: Global undo fired.' },
-    { t:'Confirm final state', ic:'🔊', g:'linear-gradient(135deg,#10b981,#065f46)', d:'"Where is invoice_march.pdf now?" — system reports exact path.', kv:[['Input','Voice query'],['Output','Speech path'],['Perception','"in Documents, modified Tuesday."'],['Fail','Rephrase query']], log:'SR: Path resolved.' }
   ]}
 };
 let q8CurTask = 'email';
@@ -2219,7 +2910,7 @@ buildQuiz('q8', [
   { q:'Why include a refreshable Braille display alongside speech?', opts:['Speech is less accurate','Braille gives silent, precise, self-paced access to spelling/punctuation/code','Cheaper','Speech cannot use headphones'], a:1, exp:'Speech is ambiguous for homophones, code and punctuation.' },
   { q:'Why does the system require confirmation before sending?', opts:['To slow interaction','Because voice is unreliable and may have misheard','Sending is irreversible — design rule: confirm all destructive actions','OS requires it'], a:2, exp:'Misrecognition must never destroy work.' },
   { q:'Role of the switch / sip-and-puff device?', opts:['Primary input','Fallback when voice and hands both unavailable','Replaces Braille','Controls volume'], a:1, exp:'Scanning is slow — deliberately not primary.' },
-  { q:'Why route output through speech, Braille AND haptics simultaneously?', opts:['To justify cost','Because no single non-visual channel is sufficient — each fails differently','Regulation requires three','To look advanced'], a:1, exp:'Each channel covers the others: speech fails in noise, Braille is silent but expensive, haptics confirm but carry little data.' }
+  { q:'Why route output through speech, Braille AND haptics simultaneously?', opts:['To justify cost','Because no single non-visual channel is sufficient — each fails differently','Regulation requires three','To look advanced'], a:1, exp:'Each channel covers the others.' }
 ]);
 </script>
 </body>
